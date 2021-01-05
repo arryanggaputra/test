@@ -2,39 +2,55 @@
 
 namespace App\Http\Controllers;
 
-use Exception;
+use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
 
 class LoginController extends Controller
 {
-    public function __construct()
+    protected $guard = 'admin';
+
+    protected function validator(array $data)
     {
-        $this->middleware('guest')->except('logout');
-        $this->middleware('guest:admin')->except('logout');
+        return Validator::make($data, [
+            'email'    => 'required|email|max:255|unique:admins',
+            'password' => 'required|min:6|confirmed',
+        ]);
+    }
+
+    public function logout()
+    {
+        //  $this->
+        Auth::guard('admin')->logout();
+        return redirect('/admin/login');
     }
 
     public function adminLogin(Request $request)
     {
+
         $this->validate($request, [
-            'email'    => 'required|email',
-            'password' => 'required|min:6',
+            'email'    => 'required',
+            'password' => 'required',
         ]);
 
-        $admin = Auth::guard('admin');
-        
-        if ($admin->attempt()
-        attempt([
-            'email'    => $request->email,
-            'password' => $request->password],
-        )) {
-            return "login";
-            // return redirect()->intended('/admin');
-        }
-        throw new Exception("Email dan password salah", 1);
+        $admin = Admin::where('email', $request->email)->first();
 
-        // return back()->withInput($request->only('email', 'remember'));
+        if (!$admin) {
+            return redirect()->back()->with('message', 'Incorrect email address or password');
+        }
+
+        if (Hash::check($request->password, $admin->password)) {
+            Auth::guard('admin')->login($admin);
+            return redirect('/admin');
+        }
+
+        return redirect()
+            ->back()
+            ->withInput($request->only('email', 'remember'))
+            ->withErrors(['email' => 'Incorrect email address or password']);
     }
 
     public function index()

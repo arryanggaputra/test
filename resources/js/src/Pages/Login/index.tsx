@@ -1,4 +1,5 @@
 import {Inertia} from '@inertiajs/inertia'
+import AlertMessage from 'components/AlertMessage'
 import Button from 'components/Button'
 import Layout from 'components/Layout'
 import React, {useCallback, useState} from 'react'
@@ -12,7 +13,7 @@ function Login() {
       e.preventDefault()
 
       try {
-        Inertia.post('/login', {
+        Inertia.post('/admin/login', {
           email: emailAddress,
           password: password,
         })
@@ -26,6 +27,7 @@ function Login() {
   return (
     <Layout isSinglePage>
       <div className="w-2/6">
+        <AlertMessage />
         <form method="POST" onSubmit={onSubmit}>
           <label className="block">
             <span className="text-gray-700">Email</span>

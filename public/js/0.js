@@ -11,10 +11,11 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
 /* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var components_Button__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! components/Button */ "./resources/js/src/components/Button/index.tsx");
-/* harmony import */ var components_Layout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! components/Layout */ "./resources/js/src/components/Layout/index.tsx");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var components_AlertMessage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! components/AlertMessage */ "./resources/js/src/components/AlertMessage/index.tsx");
+/* harmony import */ var components_Button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! components/Button */ "./resources/js/src/components/Button/index.tsx");
+/* harmony import */ var components_Layout__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! components/Layout */ "./resources/js/src/components/Layout/index.tsx");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_4__);
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -55,15 +56,16 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
+
 function Login() {
     var _this = this;
-    var _a = Object(react__WEBPACK_IMPORTED_MODULE_3__["useState"])(''), emailAddress = _a[0], setEmailAddress = _a[1];
-    var _b = Object(react__WEBPACK_IMPORTED_MODULE_3__["useState"])(''), password = _b[0], setPassword = _b[1];
-    var onSubmit = Object(react__WEBPACK_IMPORTED_MODULE_3__["useCallback"])(function (e) { return __awaiter(_this, void 0, void 0, function () {
+    var _a = Object(react__WEBPACK_IMPORTED_MODULE_4__["useState"])(''), emailAddress = _a[0], setEmailAddress = _a[1];
+    var _b = Object(react__WEBPACK_IMPORTED_MODULE_4__["useState"])(''), password = _b[0], setPassword = _b[1];
+    var onSubmit = Object(react__WEBPACK_IMPORTED_MODULE_4__["useCallback"])(function (e) { return __awaiter(_this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             e.preventDefault();
             try {
-                _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__["Inertia"].post('/login', {
+                _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__["Inertia"].post('/admin/login', {
                     email: emailAddress,
                     password: password,
                 });
@@ -74,18 +76,43 @@ function Login() {
             return [2 /*return*/];
         });
     }); }, [emailAddress, password]);
-    return (react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(components_Layout__WEBPACK_IMPORTED_MODULE_2__["default"], { isSinglePage: true },
-        react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", { className: "w-2/6" },
-            react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("form", { method: "POST", onSubmit: onSubmit },
-                react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("label", { className: "block" },
-                    react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("span", { className: "text-gray-700" }, "Email"),
-                    react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("input", { type: "email", onChange: function (e) { return setEmailAddress(e.target.value); }, required: true, className: "mt-1 block w-full", placeholder: "Masukan Alamat E-mail" })),
-                react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("label", { className: "block" },
-                    react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("span", { className: "text-gray-700" }, "Password"),
-                    react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("input", { type: "password", required: true, onChange: function (e) { return setPassword(e.target.value); }, className: "mt-1 block w-full", placeholder: "Masukan password" })),
-                react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(components_Button__WEBPACK_IMPORTED_MODULE_1__["default"], null, "Wakanda")))));
+    return (react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(components_Layout__WEBPACK_IMPORTED_MODULE_3__["default"], { isSinglePage: true },
+        react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("div", { className: "w-2/6" },
+            react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(components_AlertMessage__WEBPACK_IMPORTED_MODULE_1__["default"], null),
+            react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("form", { method: "POST", onSubmit: onSubmit },
+                react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("label", { className: "block" },
+                    react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("span", { className: "text-gray-700" }, "Email"),
+                    react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("input", { type: "email", onChange: function (e) { return setEmailAddress(e.target.value); }, required: true, className: "mt-1 block w-full", placeholder: "Masukan Alamat E-mail" })),
+                react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("label", { className: "block" },
+                    react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("span", { className: "text-gray-700" }, "Password"),
+                    react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("input", { type: "password", required: true, onChange: function (e) { return setPassword(e.target.value); }, className: "mt-1 block w-full", placeholder: "Masukan password" })),
+                react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(components_Button__WEBPACK_IMPORTED_MODULE_2__["default"], null, "Wakanda")))));
 }
 /* harmony default export */ __webpack_exports__["default"] = (Login);
+
+
+/***/ }),
+
+/***/ "./resources/js/src/components/AlertMessage/index.tsx":
+/*!************************************************************!*\
+  !*** ./resources/js/src/components/AlertMessage/index.tsx ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @inertiajs/inertia-react */ "./node_modules/@inertiajs/inertia-react/dist/index.js");
+/* harmony import */ var _inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+
+
+var AlertMessage = function () {
+    var flash = Object(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_0__["usePage"])().props.flash;
+    return (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, flash.message && (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", { className: "bg-red-500 p-5 rounded-md text-white mb-5" }, flash.message))));
+};
+/* harmony default export */ __webpack_exports__["default"] = (AlertMessage);
 
 
 /***/ }),
@@ -163,11 +190,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 
 
+
 var Navbar = function () {
+    var props = Object(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_0__["usePage"])().props;
+    var _a = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(null), admin = _a[0], setAdmin = _a[1];
+    Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+        setAdmin(props.admin);
+    }, [props]);
     return (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", { className: "bg-green-700 p-5 px-10 shadow-md" },
-        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", { className: "container max-w-screen-lg mx-auto" },
+        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", { className: "container flex flex-row max-w-screen-lg mx-auto justify-between" },
             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", { className: "text-xl font-bold text-white" },
-                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_0__["InertiaLink"], { href: "/" }, "Admin Ujian")))));
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_0__["InertiaLink"], { href: "/" }, "Admin Ujian")),
+            admin && (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", { className: "flex flex-row" },
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", { className: "text-white" },
+                    "Hai, ", admin === null || admin === void 0 ? void 0 :
+                    admin.name),
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_0__["InertiaLink"], { className: " inline-block px-4 py-1 text-sm rounded-sm ml-3 bg-red-600 text-white", href: "/admin/logout" }, "Logout"))))));
 };
 /* harmony default export */ __webpack_exports__["default"] = (Navbar);
 
