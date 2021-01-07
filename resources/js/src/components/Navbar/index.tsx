@@ -1,6 +1,5 @@
 import {usePage} from '@inertiajs/inertia-react'
 import {InertiaLink} from '@inertiajs/inertia-react'
-import Button from 'components/Button'
 import React, {useEffect, useState} from 'react'
 import {Admin} from 'types/type'
 
@@ -15,9 +14,16 @@ const Navbar = () => {
   return (
     <div className="bg-green-700 p-5 px-10 shadow-md">
       <div className="container flex flex-row max-w-screen-lg mx-auto justify-between">
-        <h1 className="text-xl font-bold text-white">
-          <InertiaLink href="/">Admin Ujian</InertiaLink>
-        </h1>
+        <div className="flex flex-row items-center">
+          <h1 className="text-xl font-bold text-white">
+            <InertiaLink href="/admin">Admin Ujian</InertiaLink>
+          </h1>
+          <InertiaLink
+            href="/admin/categories"
+            className="px-2 inline-block text-white hover:text-yellow-300">
+            Category
+          </InertiaLink>
+        </div>
         {admin && (
           <div className="flex flex-row">
             <span className="text-white">Hai, {admin?.name}</span>

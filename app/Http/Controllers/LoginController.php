@@ -50,7 +50,8 @@ class LoginController extends Controller
         return redirect()
             ->back()
             ->withInput($request->only('email', 'remember'))
-            ->withErrors(['email' => 'Incorrect email address or password']);
+            ->with('message', 'Incorrect email address or password');
+        // ->withErrors(['email' => 'Incorrect email address or password']);
     }
 
     public function index()

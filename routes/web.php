@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
@@ -28,6 +29,11 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::group(['middleware' => ['admin']], function () {
         Route::get('/', [DashboardController::class, 'index']);
+
+        Route::get('/categories', [CategoriesController::class, 'index']);
+        Route::post('/categories', [CategoriesController::class, 'store']);
+        Route::delete('/categories/{id}', [CategoriesController::class, 'delete']);
+
         Route::get('/logout', [LoginController::class, 'logout']);
     });
 });

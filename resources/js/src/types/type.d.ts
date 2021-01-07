@@ -1,8 +1,28 @@
+export interface DefaultProps {
+  errors: Errors
+  admin: Admin
+  flash: FlashMessage
+}
+
+export interface Errors {}
+
+export interface FlashMessage {
+  message?: null
+}
+
 export interface Admin {
   id: number
   name: string
   email: string
   is_super: number
+  created_at: string
+  updated_at: string
+}
+
+export interface CategoriesEntity {
+  id: number
+  title: string
+  description: string
   created_at: string
   updated_at: string
 }
