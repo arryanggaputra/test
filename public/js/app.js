@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "js/" + ({}[chunkId]||chunkId) + ".js?id=" + {"0":"89adc1c91c203fb7476b","1":"f276d5418cec0e85aa95","2":"3cac86d1eb1595dbe4d1","3":"cb141f592c8bbdf80556"}[chunkId] + ""
+/******/ 		return __webpack_require__.p + "js/" + ({}[chunkId]||chunkId) + ".js?id=" + {"0":"be49045891655d2413d6","1":"f276d5418cec0e85aa95","2":"7fd681671bece58fba0e","3":"65ed7001c85b34c36d44","4":"c83657590ab7b4f51864"}[chunkId] + ""
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -50861,6 +50861,26 @@ var map = {
 	"./Auth/Dashboard/index.tsx": [
 		"./resources/js/src/Pages/Auth/Dashboard/index.tsx",
 		2
+	],
+	"./Auth/Exams": [
+		"./resources/js/src/Pages/Auth/Exams/index.tsx",
+		1,
+		4
+	],
+	"./Auth/Exams/": [
+		"./resources/js/src/Pages/Auth/Exams/index.tsx",
+		1,
+		4
+	],
+	"./Auth/Exams/index": [
+		"./resources/js/src/Pages/Auth/Exams/index.tsx",
+		1,
+		4
+	],
+	"./Auth/Exams/index.tsx": [
+		"./resources/js/src/Pages/Auth/Exams/index.tsx",
+		1,
+		4
 	],
 	"./Login": [
 		"./resources/js/src/Pages/Login/index.tsx",

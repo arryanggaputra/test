@@ -1,9 +1,9 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[3],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[4],{
 
-/***/ "./resources/js/src/Pages/Auth/Categories/index.tsx":
-/*!**********************************************************!*\
-  !*** ./resources/js/src/Pages/Auth/Categories/index.tsx ***!
-  \**********************************************************/
+/***/ "./resources/js/src/Pages/Auth/Exams/index.tsx":
+/*!*****************************************************!*\
+  !*** ./resources/js/src/Pages/Auth/Exams/index.tsx ***!
+  \*****************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -31,37 +31,52 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var Categories = function (props) {
-    var isEdit = props.isEdit, category = props.category, categories = props.categories;
-    var _a = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(isEdit ? category === null || category === void 0 ? void 0 : category.description : ''), descriptionValue = _a[0], setDescriptionValue = _a[1];
-    var _b = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(isEdit ? category === null || category === void 0 ? void 0 : category.title : ''), title = _b[0], setTitle = _b[1];
-    var _c = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])('write'), selectedTab = _c[0], setSelectedTab = _c[1];
+var Exams = function (props) {
+    var isEdit = props.isEdit, exam = props.exam, exams = props.exams, categories = props.categories;
+    var _a = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(isEdit ? exam === null || exam === void 0 ? void 0 : exam.description : ''), descriptionValue = _a[0], setDescriptionValue = _a[1];
+    var _b = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(isEdit ? exam === null || exam === void 0 ? void 0 : exam.title : ''), title = _b[0], setTitle = _b[1];
+    var _c = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(isEdit ? exam === null || exam === void 0 ? void 0 : exam.category_id : 0), selectedCategory = _c[0], setSelectedCategory = _c[1];
+    var _d = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])('write'), selectedTab = _d[0], setSelectedTab = _d[1];
     var resetState = Object(react__WEBPACK_IMPORTED_MODULE_2__["useCallback"])(function () {
+        setSelectedCategory(0);
         setDescriptionValue('');
         setTitle('');
     }, []);
     var handleSubmit = Object(react__WEBPACK_IMPORTED_MODULE_2__["useCallback"])(function () {
+        if (!selectedCategory) {
+            alert('Pilih kategori');
+            return;
+        }
         if (isEdit) {
-            _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_5__["Inertia"].put('/admin/categories/' + (category === null || category === void 0 ? void 0 : category.id), {
+            _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_5__["Inertia"].put('/admin/exams/' + (exam === null || exam === void 0 ? void 0 : exam.id), {
                 title: title,
+                category_id: selectedCategory,
                 description: descriptionValue,
             });
         }
         else {
-            _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_5__["Inertia"].post('/admin/categories', {
+            _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_5__["Inertia"].post('/admin/exams', {
                 title: title,
+                category_id: selectedCategory,
                 description: descriptionValue,
             });
         }
         resetState();
-    }, [title, descriptionValue, isEdit, category]);
+    }, [title, descriptionValue, selectedCategory, isEdit, exam]);
     var onDelete = Object(react__WEBPACK_IMPORTED_MODULE_2__["useCallback"])(function (id) {
-        _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_5__["Inertia"].delete('/admin/categories/' + id);
+        _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_5__["Inertia"].delete('/admin/exams/' + id);
     }, []);
     return (react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(components_Layout__WEBPACK_IMPORTED_MODULE_1__["default"], { isSinglePage: true },
         react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", { className: "p-5 rounded-md border border-gray-300 bg-gray-100 shadow-sm" },
             react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("label", { className: "block" },
-                react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("input", { type: "email", value: title, onChange: function (e) { return setTitle(e.target.value); }, required: true, className: "w-full", placeholder: "Masukan Judul Kategori" })),
+                react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("input", { type: "email", value: title, onChange: function (e) { return setTitle(e.target.value); }, required: true, className: "w-full", placeholder: "Masukan Judul Ujian" })),
+            react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("label", { className: "block mt-5" },
+                react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("span", { className: "text-gray-700 font-bold block" }, "Kategori Ujian"),
+                react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("select", { onChange: function (event) {
+                        return setSelectedCategory(parseInt(event.target.value));
+                    } },
+                    react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("option", { value: "" }, "Pilih Kategori"), categories === null || categories === void 0 ? void 0 :
+                    categories.map(function (cat) { return (react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("option", { selected: selectedCategory === cat.id, key: cat.id, value: cat.id }, cat.title)); }))),
             react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("label", { className: "block mt-5" },
                 react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("span", { className: "text-gray-700 font-bold" }, "Deskripsi"),
                 react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react_mde__WEBPACK_IMPORTED_MODULE_3___default.a, { value: descriptionValue, onChange: setDescriptionValue, selectedTab: selectedTab, onTabChange: setSelectedTab, generateMarkdownPreview: function (markdown) {
@@ -81,22 +96,26 @@ var Categories = function (props) {
                                 react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("thead", { className: "bg-gray-50" },
                                     react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("tr", null,
                                         react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("th", { scope: "col", className: "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" }, "Title"),
+                                        react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("th", { scope: "col", className: "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" }, "Category"),
                                         react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("th", { scope: "col", className: "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" }, "Description"),
                                         react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("th", { scope: "col", className: "relative px-6 py-3" }))),
-                                react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("tbody", { className: "bg-white divide-y divide-gray-200" }, categories === null || categories === void 0 ? void 0 : categories.map(function (item) {
+                                react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("tbody", { className: "bg-white divide-y divide-gray-200" }, exams === null || exams === void 0 ? void 0 : exams.map(function (item) {
+                                    var _a;
                                     return (react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("tr", null,
                                         react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("td", { className: "px-6 py-4 whitespace-nowrap" },
                                             react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", { className: "flex items-center" },
                                                 react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", { className: "ml-4" },
                                                     react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", { className: "text-sm font-medium text-gray-900" }, item.title)))),
                                         react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("td", { className: "px-6 py-4 whitespace-nowrap" },
+                                            react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", { className: "text-sm text-gray-900" }, (_a = item.category) === null || _a === void 0 ? void 0 : _a.title)),
+                                        react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("td", { className: "px-6 py-4 whitespace-nowrap" },
                                             react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", { className: "text-sm text-gray-900" }, item.description)),
                                         react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("td", { className: "px-6 py-4 whitespace-nowrap text-right text-sm font-medium" },
-                                            react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_7__["InertiaLink"], { href: "/admin/categories/" + item.id, className: "cursor-pointer inline-block text-indigo-600 hover:text-indigo-900" }, "Edit"),
+                                            react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_7__["InertiaLink"], { href: "/admin/exams/" + item.id, className: "cursor-pointer inline-block text-indigo-600 hover:text-indigo-900" }, "Edit"),
                                             react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("span", { onClick: function () { return onDelete(item.id); }, className: "cursor-pointer inline-block ml-2 text-red-600 hover:text-red-900" }, "Hapus"))));
                                 })))))))))));
 };
-/* harmony default export */ __webpack_exports__["default"] = (Categories);
+/* harmony default export */ __webpack_exports__["default"] = (Exams);
 
 
 /***/ }),

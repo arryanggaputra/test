@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ExamsController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,6 +36,12 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/categories', [CategoriesController::class, 'store']);
         Route::delete('/categories/{id}', [CategoriesController::class, 'delete']);
         Route::put('/categories/{id}', [CategoriesController::class, 'update']);
+
+        Route::get('/exams', [ExamsController::class, 'index']);
+        Route::get('/exams/{id}', [ExamsController::class, 'edit']);
+        Route::post('/exams', [ExamsController::class, 'store']);
+        Route::delete('/exams/{id}', [ExamsController::class, 'delete']);
+        Route::put('/exams/{id}', [ExamsController::class, 'update']);
 
         Route::get('/logout', [LoginController::class, 'logout']);
     });

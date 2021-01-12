@@ -27,6 +27,16 @@ export interface CategoriesEntity {
   updated_at: string
 }
 
+export interface ExamsEntity {
+  id: number
+  title: string
+  description: string
+  category_id: number
+  created_at: string
+  updated_at: string
+  category?: CategoriesEntity
+}
+
 export interface PaginateData<DateItem> {
   current_page: number
   data?: DateItem[] | null
