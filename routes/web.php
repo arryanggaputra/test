@@ -31,8 +31,10 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/', [DashboardController::class, 'index']);
 
         Route::get('/categories', [CategoriesController::class, 'index']);
+        Route::get('/categories/{id}', [CategoriesController::class, 'edit']);
         Route::post('/categories', [CategoriesController::class, 'store']);
         Route::delete('/categories/{id}', [CategoriesController::class, 'delete']);
+        Route::put('/categories/{id}', [CategoriesController::class, 'update']);
 
         Route::get('/logout', [LoginController::class, 'logout']);
     });

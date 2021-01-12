@@ -35,9 +35,10 @@
         "@types/react": "^16.9.0",
         "@types/react-dom": "^16.9.0",
         "@types/react-router-dom": "^5.1.5",
-        "@uiw/react-md-editor": "^2.0.3",
         "react": "^17.0.1",
         "react-dom": "^16.14.0",
+        "react-markdown": "^5.0.3",
+        "react-mde": "^11.0.0",
         "tailwindcss": "npm:@tailwindcss/postcss7-compat"
     }
 }

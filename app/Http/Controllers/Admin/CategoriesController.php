@@ -36,7 +36,16 @@ class CategoriesController extends Controller
         $category->description = $request->get('description');
         $category->save();
 
-        return redirect()->back();
+        return redirect()->to('/admin/categories');
+    }
+
+    public function edit($id)
+    {
+        $category = Category::find($id);
+        return Inertia::render('Auth/Categories/index', [
+            'isEdit'   => true,
+            'category' => $category,
+        ]);
     }
 
     public function delete($id)
