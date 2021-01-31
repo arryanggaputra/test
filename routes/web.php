@@ -39,6 +39,7 @@ Route::group(['prefix' => 'admin'], function () {
 
         Route::get('/exams', [ExamsController::class, 'index']);
         Route::get('/exams/{id}', [ExamsController::class, 'edit']);
+        Route::get('/exams/{id}/questions', [ExamsController::class, 'questions']);
         Route::post('/exams', [ExamsController::class, 'store']);
         Route::delete('/exams/{id}', [ExamsController::class, 'delete']);
         Route::put('/exams/{id}', [ExamsController::class, 'update']);

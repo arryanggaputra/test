@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "js/" + ({}[chunkId]||chunkId) + ".js?id=" + {"0":"8f7f44cd856ff55825d0","1":"9601768c956af00d9e48","2":"bc6f844b83937fea9ab5","3":"d1143a25ea0180a6a98b","4":"50b450a76f7e78136fdb"}[chunkId] + ""
+/******/ 		return __webpack_require__.p + "js/" + ({}[chunkId]||chunkId) + ".js?id=" + {"0":"8f7f44cd856ff55825d0","1":"75c1fe3caeddd72b3dff","2":"ebcfdbfe4fd28a210678","3":"fcef909b6e0a7647987c","4":"92b0b251ae22f5816ced","6":"164398e6a7293a12e1ac","7":"88ff4312db745ec1cd97","8":"854b16ff09693970db43","9":"2f6ce47acb1138f04f15"}[chunkId] + ""
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -50871,6 +50871,40 @@ var map = {
 		"./resources/js/src/Pages/Auth/Exams/index.tsx",
 		0,
 		3
+	],
+	"./Auth/Exams/AddQuestion": [
+		"./resources/js/src/Pages/Auth/Exams/AddQuestion.tsx",
+		0,
+		9,
+		6
+	],
+	"./Auth/Exams/AddQuestion.tsx": [
+		"./resources/js/src/Pages/Auth/Exams/AddQuestion.tsx",
+		0,
+		9,
+		6
+	],
+	"./Auth/Exams/components/QuestionChoice": [
+		"./resources/js/src/Pages/Auth/Exams/components/QuestionChoice.tsx",
+		9,
+		8
+	],
+	"./Auth/Exams/components/QuestionChoice.tsx": [
+		"./resources/js/src/Pages/Auth/Exams/components/QuestionChoice.tsx",
+		9,
+		8
+	],
+	"./Auth/Exams/components/QuestionForm": [
+		"./resources/js/src/Pages/Auth/Exams/components/QuestionForm.tsx",
+		0,
+		9,
+		7
+	],
+	"./Auth/Exams/components/QuestionForm.tsx": [
+		"./resources/js/src/Pages/Auth/Exams/components/QuestionForm.tsx",
+		0,
+		9,
+		7
 	],
 	"./Auth/Exams/index": [
 		"./resources/js/src/Pages/Auth/Exams/index.tsx",

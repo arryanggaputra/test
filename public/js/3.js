@@ -112,6 +112,7 @@ var Exams = function (props) {
                                             react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", { className: "text-sm text-gray-900" }, item.description)),
                                         react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("td", { className: "px-6 py-4 whitespace-nowrap text-right text-sm font-medium" },
                                             react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_7__["InertiaLink"], { href: "/admin/exams/" + item.id, className: "cursor-pointer inline-block text-indigo-600 hover:text-indigo-900" }, "Edit"),
+                                            react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_7__["InertiaLink"], { href: "/admin/exams/" + item.id + "/questions", className: "cursor-pointer inline-block ml-2 text-yellow-500 hover:text-yellow-700" }, "Soal"),
                                             react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("span", { onClick: function () { return onDelete(item.id); }, className: "cursor-pointer inline-block ml-2 text-red-600 hover:text-red-900" }, "Hapus"))));
                                 })))))))))));
 };

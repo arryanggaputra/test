@@ -31,6 +31,7 @@ mix
     resolve: {
       alias: {
         components: path.resolve(__dirname, 'resources/js/src/components'),
+        lib: path.resolve(__dirname, 'resources/js/src/lib'),
       },
       extensions: ['*', '.js', '.jsx', '.vue', '.ts', '.tsx'],
     },

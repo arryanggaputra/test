@@ -170,6 +170,11 @@ const Exams: React.FC<IExam & DefaultProps> = props => {
                                 className="cursor-pointer inline-block text-indigo-600 hover:text-indigo-900">
                                 Edit
                               </InertiaLink>
+                              <InertiaLink
+                                href={`/admin/exams/${item.id}/questions`}
+                                className="cursor-pointer inline-block ml-2 text-yellow-500 hover:text-yellow-700">
+                                Soal
+                              </InertiaLink>
                               <span
                                 onClick={() => onDelete(item.id)}
                                 className="cursor-pointer inline-block ml-2 text-red-600 hover:text-red-900">

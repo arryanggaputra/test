@@ -55,6 +55,14 @@ class ExamsController extends Controller
         ]);
     }
 
+    public function questions($id)
+    {
+        $exam = Exam::with('category')->find($id);
+        return Inertia::render('Auth/Exams/AddQuestion', [
+            'exam' => $exam,
+        ]);
+    }
+
     public function delete($id)
     {
         $exam = Exam::find($id);

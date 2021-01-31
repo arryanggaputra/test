@@ -58,3 +58,9 @@ export interface LinksEntity {
   label: string | number
   active: boolean
 }
+
+export interface QuestionChoiceEntity {
+  description?: string
+  key: string
+  index: number
+}
