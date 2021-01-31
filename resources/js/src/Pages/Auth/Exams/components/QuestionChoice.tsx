@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react'
+import React, {useCallback, useEffect, useRef, useState} from 'react'
 import {QuestionChoiceEntity} from 'types/type'
 import {DebounceInput} from 'react-debounce-input'
 
@@ -7,6 +7,7 @@ interface IQuestionChoice {
   id: string
   keyAnswer: string
   onChange: (data: QuestionChoiceEntity) => void
+  onCorrect: (key: string) => void
 }
 
 const QuestionChoice: React.FC<IQuestionChoice> = props => {
@@ -15,7 +16,7 @@ const QuestionChoice: React.FC<IQuestionChoice> = props => {
 
   const [answer, setAnswer] = useState<QuestionChoiceEntity>({
     index: index,
-    key: keyAnswer,
+    value: keyAnswer,
     description: '',
   })
 
@@ -36,10 +37,19 @@ const QuestionChoice: React.FC<IQuestionChoice> = props => {
     setAnswer(_answer)
   }, [descriptionValue])
 
+  const onCorrect = useCallback(() => {
+    props.onCorrect(keyAnswer)
+  }, [keyAnswer])
+
   return (
     <div className="w-full pt-1 pb-1 center items-baseline">
       <div className="flex flex-row items-center">
-        <input type="radio" name={`answer-${id}`} value={keyAnswer} />
+        <input
+          type="radio"
+          name={`answer-${id}`}
+          onClick={onCorrect}
+          value={keyAnswer}
+        />
         <span className="uppercase font-bold pl-1">{keyAnswer}.</span>
       </div>
       <DebounceInput
@@ -50,7 +60,6 @@ const QuestionChoice: React.FC<IQuestionChoice> = props => {
         placeholder="Tulis jawaban disini"
         onChange={event => setDescriptionValue(event.target.value)}
       />
-      <pre>{JSON.stringify(answer)}</pre>
     </div>
   )
 }

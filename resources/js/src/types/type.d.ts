@@ -61,6 +61,6 @@ export interface LinksEntity {
 
 export interface QuestionChoiceEntity {
   description?: string
-  key: string
+  value: string
   index: number
 }

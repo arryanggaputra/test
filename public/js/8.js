@@ -20,7 +20,7 @@ var QuestionChoice = function (props) {
     var _a = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''), descriptionValue = _a[0], setDescriptionValue = _a[1];
     var _b = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
         index: index,
-        key: keyAnswer,
+        value: keyAnswer,
         description: '',
     }), answer = _b[0], setAnswer = _b[1];
     var firstRun = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(true);
@@ -37,14 +37,16 @@ var QuestionChoice = function (props) {
         _answer.description = descriptionValue;
         setAnswer(_answer);
     }, [descriptionValue]);
+    var onCorrect = Object(react__WEBPACK_IMPORTED_MODULE_0__["useCallback"])(function () {
+        props.onCorrect(keyAnswer);
+    }, [keyAnswer]);
     return (react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", { className: "w-full pt-1 pb-1 center items-baseline" },
         react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", { className: "flex flex-row items-center" },
-            react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", { type: "radio", name: "answer-" + id, value: keyAnswer }),
+            react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", { type: "radio", name: "answer-" + id, onClick: onCorrect, value: keyAnswer }),
             react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", { className: "uppercase font-bold pl-1" },
                 keyAnswer,
                 ".")),
-        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_debounce_input__WEBPACK_IMPORTED_MODULE_1__["DebounceInput"], { minLength: 2, element: "textarea", className: "w-full", debounceTimeout: 1000, placeholder: "Tulis jawaban disini", onChange: function (event) { return setDescriptionValue(event.target.value); } }),
-        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("pre", null, JSON.stringify(answer))));
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_debounce_input__WEBPACK_IMPORTED_MODULE_1__["DebounceInput"], { minLength: 2, element: "textarea", className: "w-full", debounceTimeout: 1000, placeholder: "Tulis jawaban disini", onChange: function (event) { return setDescriptionValue(event.target.value); } })));
 };
 /* harmony default export */ __webpack_exports__["default"] = (QuestionChoice);
 

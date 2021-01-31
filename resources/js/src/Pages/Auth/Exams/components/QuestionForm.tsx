@@ -1,3 +1,4 @@
+import Button from 'components/Button'
 import alphabet from 'lib/alphabet'
 import makeid from 'lib/makeId'
 import React, {useCallback, useEffect, useState} from 'react'
@@ -12,6 +13,9 @@ const QuestionForm = () => {
   const [id, setId] = useState(makeid())
   const [totalAnswer, setTotalAnswer] = useState(3)
   const [selectedTab, setSelectedTab] = useState<'write' | 'preview'>('write')
+  const [selectedAnswer, setSelectedAnswer] = useState<string | undefined>(
+    undefined,
+  )
   const [listAnswers, setListAnswers] = useState(
     new Set<QuestionChoiceEntity>(),
   )
@@ -19,7 +23,7 @@ const QuestionForm = () => {
   const addAnswer = useCallback(
     (data: QuestionChoiceEntity) => {
       listAnswers.forEach(item => {
-        if (item.key === data.key) {
+        if (item.value === data.value) {
           listAnswers.delete(item)
         }
       })
@@ -31,9 +35,30 @@ const QuestionForm = () => {
     [listAnswers],
   )
 
-  useEffect(() => {
-    console.log(listAnswers)
-  }, [listAnswers])
+  const onSelectCorrectAnswer = (key: string) => {
+    setSelectedAnswer(key)
+  }
+
+  const handleSubmit = useCallback(() => {
+    if (!descriptionValue) {
+      alert('Harap isi kolom pertanyaan')
+      return
+    }
+
+    let answerNotValid = Array.from(listAnswers.values()).find(item => {
+      if (!item.description) {
+        return item
+      }
+    })
+    if (answerNotValid) {
+      alert('Harap lengkapi jawan di kunci ' + answerNotValid.value)
+      return
+    }
+    if (!selectedAnswer) {
+      alert('Harap pilih jawaban yang benar ')
+      return
+    }
+  }, [descriptionValue, listAnswers, selectedAnswer])
 
   const renderAnswerField = useCallback(() => {
     let answerField = []
@@ -42,6 +67,7 @@ const QuestionForm = () => {
       answerField.push(
         <QuestionChoice
           onChange={addAnswer}
+          onCorrect={onSelectCorrectAnswer}
           index={index}
           id={id}
           keyAnswer={keyAnswer}
@@ -70,7 +96,6 @@ const QuestionForm = () => {
   return (
     <div className="w-full">
       <h1 className="font-bold text-2xl">Pertanyaan</h1>
-      <pre>{JSON.stringify(Array.from(listAnswers.values()))}</pre>
       <ReactMde
         value={descriptionValue}
         onChange={setDescriptionValue}
@@ -85,17 +110,25 @@ const QuestionForm = () => {
           },
         }}
       />
-      <div className="flex flex-col">{renderAnswerField()}</div>
-      <span
-        className="bg-gray-200 p-2 rounded-md cursor-pointer text-xs mr-2"
-        onClick={reduceAnswerField}>
-        - Kurangi Kolom Jawaban
-      </span>
-      <span
-        className=" bg-gray-700 p-2 rounded-md cursor-pointer text-white text-xs"
-        onClick={addMoreAnswerField}>
-        + Tambah Kolom Jawaban
-      </span>
+      <div className="rounded-md p-5 w-full mt-2 bg-gray-100">
+        <div className=" flex flex-row justify-end">
+          <span
+            className="bg-gray-200 p-2 rounded-md cursor-pointer text-xs mr-2"
+            onClick={reduceAnswerField}>
+            - Kurangi Kolom Jawaban
+          </span>
+          <span
+            className=" bg-gray-700 p-2 rounded-md cursor-pointer text-white text-xs"
+            onClick={addMoreAnswerField}>
+            + Tambah Kolom Jawaban
+          </span>
+        </div>
+        <div className="flex flex-col">{renderAnswerField()}</div>
+      </div>
+
+      <div>
+        <Button onClick={handleSubmit}>Simpan Pertanyaan</Button>
+      </div>
     </div>
   )
 }
