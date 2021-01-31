@@ -2,21 +2,23 @@ import React from 'react'
 import Layout from 'components/Layout'
 import Button from 'components/Button'
 
-function Dashboard() {
+interface IDashboard {
+  categoryTotal: number
+  examTotal: number
+}
+
+const Dashboard: React.FC<IDashboard> = props => {
   return (
     <Layout isSinglePage>
-      <div className="p-5 rounded-md border border-gray-300 bg-gray-100 shadow-sm">
-        <label className="block">
-          <span className="text-gray-700 font-bold">Tambah Ujian Baru</span>
-          <input
-            type="email"
-            onChange={() => {}}
-            required
-            className="mt-1 block w-full p-5 text-2xl"
-            placeholder="Masukan Judul Ujian"
-          />
-        </label>
-        <Button>Tambahkan Ujian Baru</Button>
+      <div className="grid grid-cols-3 gap-5">
+        <div className="rounded-md cursor-pointer p-3 bg-gray-50 border border-gray-200">
+          <span className="font-bold text-2xl block">Kategori</span>
+          <span>Total: {props.categoryTotal}</span>
+        </div>
+        <div className="rounded-md cursor-pointer p-3 bg-gray-50 border border-gray-200">
+          <span className="font-bold text-2xl block">Ujian</span>
+          <span>Total: {props.examTotal}</span>
+        </div>
       </div>
     </Layout>
   )

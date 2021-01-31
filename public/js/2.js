@@ -1,30 +1,102 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[2],{
 
-/***/ "./resources/js/src/Pages/Auth/Dashboard/index.tsx":
-/*!*********************************************************!*\
-  !*** ./resources/js/src/Pages/Auth/Dashboard/index.tsx ***!
-  \*********************************************************/
+/***/ "./resources/js/src/Pages/Auth/Categories/index.tsx":
+/*!**********************************************************!*\
+  !*** ./resources/js/src/Pages/Auth/Categories/index.tsx ***!
+  \**********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var components_Button__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! components/Button */ "./resources/js/src/components/Button/index.tsx");
 /* harmony import */ var components_Layout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! components/Layout */ "./resources/js/src/components/Layout/index.tsx");
-/* harmony import */ var components_Button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! components/Button */ "./resources/js/src/components/Button/index.tsx");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_mde__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-mde */ "./node_modules/react-mde/lib/js/index.js");
+/* harmony import */ var react_mde__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_mde__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react_markdown__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-markdown */ "./node_modules/react-markdown/lib/react-markdown.js");
+/* harmony import */ var react_markdown__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_markdown__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
+/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_inertiajs_inertia__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var react_mde_lib_styles_css_react_mde_all_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-mde/lib/styles/css/react-mde-all.css */ "./node_modules/react-mde/lib/styles/css/react-mde-all.css");
+/* harmony import */ var react_mde_lib_styles_css_react_mde_all_css__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_mde_lib_styles_css_react_mde_all_css__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @inertiajs/inertia-react */ "./node_modules/@inertiajs/inertia-react/dist/index.js");
+/* harmony import */ var _inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_7__);
 
 
 
-function Dashboard() {
-    return (react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(components_Layout__WEBPACK_IMPORTED_MODULE_1__["default"], { isSinglePage: true },
-        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", { className: "p-5 rounded-md border border-gray-300 bg-gray-100 shadow-sm" },
-            react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", { className: "block" },
-                react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", { className: "text-gray-700 font-bold" }, "Tambah Ujian Baru"),
-                react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", { type: "email", onChange: function () { }, required: true, className: "mt-1 block w-full p-5 text-2xl", placeholder: "Masukan Judul Ujian" })),
-            react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(components_Button__WEBPACK_IMPORTED_MODULE_2__["default"], null, "Tambahkan Ujian Baru"))));
-}
-/* harmony default export */ __webpack_exports__["default"] = (Dashboard);
+
+
+
+
+
+var Categories = function (props) {
+    var isEdit = props.isEdit, category = props.category, categories = props.categories;
+    var _a = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(isEdit ? category === null || category === void 0 ? void 0 : category.description : ''), descriptionValue = _a[0], setDescriptionValue = _a[1];
+    var _b = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(isEdit ? category === null || category === void 0 ? void 0 : category.title : ''), title = _b[0], setTitle = _b[1];
+    var _c = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])('write'), selectedTab = _c[0], setSelectedTab = _c[1];
+    var resetState = Object(react__WEBPACK_IMPORTED_MODULE_2__["useCallback"])(function () {
+        setDescriptionValue('');
+        setTitle('');
+    }, []);
+    var handleSubmit = Object(react__WEBPACK_IMPORTED_MODULE_2__["useCallback"])(function () {
+        if (isEdit) {
+            _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_5__["Inertia"].put('/admin/categories/' + (category === null || category === void 0 ? void 0 : category.id), {
+                title: title,
+                description: descriptionValue,
+            });
+        }
+        else {
+            _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_5__["Inertia"].post('/admin/categories', {
+                title: title,
+                description: descriptionValue,
+            });
+        }
+        resetState();
+    }, [title, descriptionValue, isEdit, category]);
+    var onDelete = Object(react__WEBPACK_IMPORTED_MODULE_2__["useCallback"])(function (id) {
+        _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_5__["Inertia"].delete('/admin/categories/' + id);
+    }, []);
+    return (react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(components_Layout__WEBPACK_IMPORTED_MODULE_1__["default"], { isSinglePage: true },
+        react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", { className: "p-5 rounded-md border border-gray-300 bg-gray-100 shadow-sm" },
+            react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("label", { className: "block" },
+                react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("input", { type: "email", value: title, onChange: function (e) { return setTitle(e.target.value); }, required: true, className: "w-full", placeholder: "Masukan Judul Kategori" })),
+            react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("label", { className: "block mt-5" },
+                react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("span", { className: "text-gray-700 font-bold" }, "Deskripsi"),
+                react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react_mde__WEBPACK_IMPORTED_MODULE_3___default.a, { value: descriptionValue, onChange: setDescriptionValue, selectedTab: selectedTab, onTabChange: setSelectedTab, generateMarkdownPreview: function (markdown) {
+                        return Promise.resolve(react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react_markdown__WEBPACK_IMPORTED_MODULE_4___default.a, { source: markdown }));
+                    }, childProps: {
+                        writeButton: {
+                            tabIndex: -1,
+                        },
+                    } })),
+            react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(components_Button__WEBPACK_IMPORTED_MODULE_0__["default"], { onClick: handleSubmit }, isEdit ? 'Ubah Kategori' : 'Simpan Kategori')),
+        !isEdit && (react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", { className: "mt-5" },
+            react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", { className: "flex flex-col" },
+                react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", { className: "-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8" },
+                    react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", { className: "py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8" },
+                        react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", { className: "shadow overflow-hidden border-b border-gray-200 sm:rounded-lg" },
+                            react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("table", { className: "min-w-full divide-y divide-gray-200" },
+                                react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("thead", { className: "bg-gray-50" },
+                                    react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("tr", null,
+                                        react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("th", { scope: "col", className: "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" }, "Title"),
+                                        react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("th", { scope: "col", className: "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" }, "Description"),
+                                        react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("th", { scope: "col", className: "relative px-6 py-3" }))),
+                                react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("tbody", { className: "bg-white divide-y divide-gray-200" }, categories === null || categories === void 0 ? void 0 : categories.map(function (item) {
+                                    return (react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("tr", null,
+                                        react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("td", { className: "px-6 py-4 whitespace-nowrap" },
+                                            react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", { className: "flex items-center" },
+                                                react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", { className: "ml-4" },
+                                                    react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", { className: "text-sm font-medium text-gray-900" }, item.title)))),
+                                        react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("td", { className: "px-6 py-4 whitespace-nowrap" },
+                                            react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", { className: "text-sm text-gray-900" }, item.description)),
+                                        react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("td", { className: "px-6 py-4 whitespace-nowrap text-right text-sm font-medium" },
+                                            react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_7__["InertiaLink"], { href: "/admin/categories/" + item.id, className: "cursor-pointer inline-block text-indigo-600 hover:text-indigo-900" }, "Edit"),
+                                            react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("span", { onClick: function () { return onDelete(item.id); }, className: "cursor-pointer inline-block ml-2 text-red-600 hover:text-red-900" }, "Hapus"))));
+                                })))))))))));
+};
+/* harmony default export */ __webpack_exports__["default"] = (Categories);
 
 
 /***/ }),

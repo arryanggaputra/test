@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "js/" + ({}[chunkId]||chunkId) + ".js?id=" + {"0":"be49045891655d2413d6","1":"f276d5418cec0e85aa95","2":"7fd681671bece58fba0e","3":"65ed7001c85b34c36d44","4":"c83657590ab7b4f51864"}[chunkId] + ""
+/******/ 		return __webpack_require__.p + "js/" + ({}[chunkId]||chunkId) + ".js?id=" + {"0":"8f7f44cd856ff55825d0","1":"9601768c956af00d9e48","2":"bc6f844b83937fea9ab5","3":"d1143a25ea0180a6a98b","4":"50b450a76f7e78136fdb"}[chunkId] + ""
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -50828,75 +50828,75 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 var map = {
 	"./Auth/Categories": [
 		"./resources/js/src/Pages/Auth/Categories/index.tsx",
-		1,
-		3
+		0,
+		2
 	],
 	"./Auth/Categories/": [
 		"./resources/js/src/Pages/Auth/Categories/index.tsx",
-		1,
-		3
+		0,
+		2
 	],
 	"./Auth/Categories/index": [
 		"./resources/js/src/Pages/Auth/Categories/index.tsx",
-		1,
-		3
+		0,
+		2
 	],
 	"./Auth/Categories/index.tsx": [
 		"./resources/js/src/Pages/Auth/Categories/index.tsx",
-		1,
-		3
+		0,
+		2
 	],
 	"./Auth/Dashboard": [
 		"./resources/js/src/Pages/Auth/Dashboard/index.tsx",
-		2
+		4
 	],
 	"./Auth/Dashboard/": [
 		"./resources/js/src/Pages/Auth/Dashboard/index.tsx",
-		2
+		4
 	],
 	"./Auth/Dashboard/index": [
 		"./resources/js/src/Pages/Auth/Dashboard/index.tsx",
-		2
+		4
 	],
 	"./Auth/Dashboard/index.tsx": [
 		"./resources/js/src/Pages/Auth/Dashboard/index.tsx",
-		2
+		4
 	],
 	"./Auth/Exams": [
 		"./resources/js/src/Pages/Auth/Exams/index.tsx",
-		1,
-		4
+		0,
+		3
 	],
 	"./Auth/Exams/": [
 		"./resources/js/src/Pages/Auth/Exams/index.tsx",
-		1,
-		4
+		0,
+		3
 	],
 	"./Auth/Exams/index": [
 		"./resources/js/src/Pages/Auth/Exams/index.tsx",
-		1,
-		4
+		0,
+		3
 	],
 	"./Auth/Exams/index.tsx": [
 		"./resources/js/src/Pages/Auth/Exams/index.tsx",
-		1,
-		4
+		0,
+		3
 	],
 	"./Login": [
 		"./resources/js/src/Pages/Login/index.tsx",
-		0
+		1
 	],
 	"./Login/": [
 		"./resources/js/src/Pages/Login/index.tsx",
-		0
+		1
 	],
 	"./Login/index": [
 		"./resources/js/src/Pages/Login/index.tsx",
-		0
+		1
 	],
 	"./Login/index.tsx": [
 		"./resources/js/src/Pages/Login/index.tsx",
-		0
+		1
 	]
 };
 function webpackAsyncContext(req) {
