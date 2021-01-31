@@ -48,7 +48,7 @@ var QuestionChoice = function (props) {
                 ".")),
         react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_debounce_input__WEBPACK_IMPORTED_MODULE_1__["DebounceInput"], { minLength: 2, element: "textarea", className: "w-full", debounceTimeout: 1000, placeholder: "Tulis jawaban disini", onChange: function (event) { return setDescriptionValue(event.target.value); } })));
 };
-/* harmony default export */ __webpack_exports__["default"] = (QuestionChoice);
+/* harmony default export */ __webpack_exports__["default"] = (react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(QuestionChoice));
 
 
 /***/ })

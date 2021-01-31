@@ -1,3 +1,4 @@
+import {Inertia} from '@inertiajs/inertia'
 import Button from 'components/Button'
 import alphabet from 'lib/alphabet'
 import makeid from 'lib/makeId'
@@ -5,10 +6,14 @@ import React, {useCallback, useEffect, useState} from 'react'
 import ReactMarkdown from 'react-markdown'
 import ReactMde from 'react-mde'
 import 'react-mde/lib/styles/css/react-mde-all.css'
-import {QuestionChoiceEntity} from 'types/type'
+import {ExamsEntity, QuestionChoiceEntity} from 'types/type'
 import QuestionChoice from './QuestionChoice'
 
-const QuestionForm = () => {
+interface IQuestionForm {
+  exam?: ExamsEntity
+}
+
+const QuestionForm: React.FC<IQuestionForm> = props => {
   const [descriptionValue, setDescriptionValue] = useState('')
   const [id, setId] = useState(makeid())
   const [totalAnswer, setTotalAnswer] = useState(3)
@@ -58,6 +63,14 @@ const QuestionForm = () => {
       alert('Harap pilih jawaban yang benar ')
       return
     }
+
+    let questionToSave = {
+      question: descriptionValue,
+      answers: Array.from(listAnswers.values()),
+      selectedAnswer,
+    }
+
+    Inertia.post(`/admin/exams/${props.exam?.id}/questions`, questionToSave)
   }, [descriptionValue, listAnswers, selectedAnswer])
 
   const renderAnswerField = useCallback(() => {
@@ -133,4 +146,4 @@ const QuestionForm = () => {
   )
 }
 
-export default QuestionForm
+export default React.memo(QuestionForm)

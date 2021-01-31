@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Answer;
 use App\Models\Category;
 use App\Models\Exam;
+use App\Models\Question;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class ExamsController extends Controller
@@ -61,6 +64,41 @@ class ExamsController extends Controller
         return Inertia::render('Auth/Exams/AddQuestion', [
             'exam' => $exam,
         ]);
+    }
+
+    public function questionsStore($id, Request $request)
+    {
+        $exam = Exam::with('category')->find($id);
+
+        DB::beginTransaction();
+
+        $_question      = $request->get('question');
+        $_answers       = $request->get('answers');
+        $_correctAnswer = $request->get('selectedAnswer');
+
+        $question              = new Question();
+        $question->description = $_question;
+        $question->exam_id     = $exam->id;
+        $question->category_id = $exam->category_id;
+        $question->save();
+
+        $listAnswer = array();
+
+        foreach ($_answers as $ans) {
+            $listAnswer[] = [
+                'question_id' => $question->id,
+                'description' => $ans['description'],
+                'value'       => $ans['value'],
+                'is_correct'  => $ans['value'] === $_correctAnswer ? true : false,
+            ];
+        }
+
+        Answer::insert($listAnswer);
+
+        DB::commit();
+
+        return redirect()->to('/admin/exams');
+
     }
 
     public function delete($id)

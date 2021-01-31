@@ -20,7 +20,7 @@ const AddQuestion: React.FC<IAddQuestion> = props => {
         </span>
       </div>
       <div className="mt-5">
-        <QuestionForm />
+        <QuestionForm exam={exam} />
       </div>
     </Layout>
   )

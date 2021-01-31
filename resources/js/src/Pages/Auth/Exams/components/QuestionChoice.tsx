@@ -64,4 +64,4 @@ const QuestionChoice: React.FC<IQuestionChoice> = props => {
   )
 }
 
-export default QuestionChoice
+export default React.memo(QuestionChoice)
