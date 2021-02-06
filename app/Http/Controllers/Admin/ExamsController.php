@@ -86,7 +86,7 @@ class ExamsController extends Controller
 
     public function questionsEdit($id, $questionId)
     {
-        $exam     = Exam::find($id);
+        $exam     = Exam::with('category')->find($id);
         $question = Question::with('answer')->find($questionId);
 
         return Inertia::render('Auth/Exams/ExamQuestionAdd', [
@@ -124,12 +124,14 @@ class ExamsController extends Controller
     {
         DB::beginTransaction();
 
-        $_question      = request('question');
-        $_answers       = request('answers');
-        $_correctAnswer = request('selectedAnswer');
+        $_question           = request('question');
+        $_questionDiscussion = request('questionDiscussion');
+        $_answers            = request('answers');
+        $_correctAnswer      = request('selectedAnswer');
 
         $question              = $question === null ? new Question() : Question::find($question->id);
         $question->description = $_question;
+        $question->discussion  = $_questionDiscussion;
         $question->exam_id     = $exam->id;
         $question->category_id = $exam->category_id;
         $question->save();

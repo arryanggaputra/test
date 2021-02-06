@@ -68,6 +68,7 @@ export interface QuestionChoiceEntity {
 export interface QuestonsEntity {
   id: number
   description: string
+  discussion?: string
   category_id: number
   exam_id: number
   created_at: string

@@ -19,6 +19,7 @@ const QuestionForm: React.FC<IQuestionForm> = props => {
   const {exam, isEdit, question} = props
 
   const [descriptionValue, setDescriptionValue] = useState('')
+  const [discussValue, setDiscussValue] = useState('')
   const [id] = useState(makeid())
   const [totalAnswer, setTotalAnswer] = useState(3)
   const [selectedTab, setSelectedTab] = useState<'write' | 'preview'>('write')
@@ -33,6 +34,7 @@ const QuestionForm: React.FC<IQuestionForm> = props => {
     if (!isEdit) return
 
     setDescriptionValue(question?.description ?? '')
+    setDiscussValue(question?.discussion ?? '')
     setTotalAnswer(question?.answer?.length ? question?.answer?.length - 1 : 3)
 
     let getCorrectAnswer = question?.answer?.find(item => item.is_correct === 1)
@@ -80,6 +82,7 @@ const QuestionForm: React.FC<IQuestionForm> = props => {
 
     let questionToSave = {
       question: descriptionValue,
+      questionDiscussion: discussValue,
       answers: Array.from(listAnswers.values()),
       selectedAnswer,
     }
@@ -92,7 +95,14 @@ const QuestionForm: React.FC<IQuestionForm> = props => {
       `/admin/exams/${props.exam?.id}/questions/${question?.id}`,
       questionToSave,
     )
-  }, [descriptionValue, listAnswers, selectedAnswer, isEdit, question])
+  }, [
+    descriptionValue,
+    discussValue,
+    listAnswers,
+    selectedAnswer,
+    isEdit,
+    question,
+  ])
 
   const renderAnswerField = useCallback(() => {
     let allAnswers = question?.answer
@@ -146,20 +156,41 @@ const QuestionForm: React.FC<IQuestionForm> = props => {
           },
         }}
       />
-      <div className="rounded-md p-5 w-full mt-2 bg-gray-100">
-        <div className=" flex flex-row justify-end">
-          <span
-            className="bg-gray-200 p-2 rounded-md cursor-pointer text-xs mr-2"
-            onClick={reduceAnswerField}>
-            - Kurangi Kolom Jawaban
-          </span>
-          <span
-            className=" bg-gray-700 p-2 rounded-md cursor-pointer text-white text-xs"
-            onClick={addMoreAnswerField}>
-            + Tambah Kolom Jawaban
-          </span>
+      <div className="flex flex-row">
+        <div className=" flex-1 pr-3">
+          <div className="rounded-md p-5 w-full mt-2 bg-gray-100">
+            <div className=" flex flex-row justify-end">
+              <span
+                className="bg-gray-200 p-2 rounded-md cursor-pointer text-xs mr-2"
+                onClick={reduceAnswerField}>
+                - Kurangi Kolom Jawaban
+              </span>
+              <span
+                className=" bg-gray-700 p-2 rounded-md cursor-pointer text-white text-xs"
+                onClick={addMoreAnswerField}>
+                + Tambah Kolom Jawaban
+              </span>
+            </div>
+            <div className="flex flex-col">{renderAnswerField()}</div>
+          </div>
         </div>
-        <div className="flex flex-col">{renderAnswerField()}</div>
+        <div className=" flex-1 pr-3">
+          <h1 className="font-bold text-2xl my-3">Pembahasan Soal</h1>
+          <ReactMde
+            value={discussValue}
+            onChange={setDiscussValue}
+            selectedTab={selectedTab}
+            onTabChange={setSelectedTab}
+            generateMarkdownPreview={markdown =>
+              Promise.resolve(<ReactMarkdown source={markdown} />)
+            }
+            childProps={{
+              writeButton: {
+                tabIndex: -1,
+              },
+            }}
+          />
+        </div>
       </div>
 
       <div>
