@@ -7,6 +7,10 @@ interface IAlertMessage {
 const AlertMessage: React.FC<IAlertMessage> = props => {
   const {flash} = usePage().props
 
+  if (!flash.message && !props.message) {
+    return null
+  }
+
   return (
     <>
       <div className="bg-red-500 p-5 rounded-md text-white mb-5">
