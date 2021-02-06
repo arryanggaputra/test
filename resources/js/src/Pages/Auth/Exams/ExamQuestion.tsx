@@ -1,5 +1,6 @@
 import {Inertia} from '@inertiajs/inertia'
 import {InertiaLink} from '@inertiajs/inertia-react'
+import AlertMessage from 'components/AlertMessage'
 import Button from 'components/Button'
 import Layout from 'components/Layout'
 import React, {useCallback} from 'react'
@@ -38,7 +39,15 @@ const ExamQuestion: React.FC<IExamQuestion> = props => {
           <span className="font-bold text-2xl">Daftar Soal Ujian</span>
           <Button onClick={onCreateNewQuestion}>Tambah Soal</Button>
         </div>
-        <table className="table table-hover mt-5">
+        {questons && questons.length < 1 && (
+          <div className="my-10">
+            <AlertMessage message={'Tidak ada soal ujian'}></AlertMessage>
+          </div>
+        )}
+        <table
+          className={`table table-hover mt-5 ${
+            questons && questons.length < 1 ? ' hidden ' : ''
+          }`}>
           <thead>
             <tr>
               <th style={{width: '10%'}}>No</th>
