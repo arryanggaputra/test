@@ -14,7 +14,7 @@ class AddDiscussionToQuestionTable extends Migration
     public function up()
     {
         Schema::table('questions', function (Blueprint $table) {
-            $table->text('discussion')->after('description');
+            $table->text('discussion')->after('description')->nullable();
         });
     }
 
