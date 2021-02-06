@@ -1,5 +1,6 @@
 import {Inertia} from '@inertiajs/inertia'
 import {InertiaLink} from '@inertiajs/inertia-react'
+import Button from 'components/Button'
 import Layout from 'components/Layout'
 import React, {useCallback} from 'react'
 import {ExamsEntity, QuestonsEntity} from 'types/type'
@@ -19,6 +20,10 @@ const ExamQuestion: React.FC<IExamQuestion> = props => {
     }
   }, [])
 
+  const onCreateNewQuestion = useCallback(() => {
+    Inertia.visit(`/admin/exams/${exam?.id}/questions/add`)
+  }, [])
+
   return (
     <Layout isSinglePage>
       <div className="rounded-md shadow-md cursor-pointer flex flex-col p-3 bg-gray-50 border border-gray-200">
@@ -29,7 +34,10 @@ const ExamQuestion: React.FC<IExamQuestion> = props => {
         </span>
       </div>
       <div className="mt-5 mb-10">
-        <span className="font-bold text-2xl">Daftar Soal Ujian</span>
+        <div className="flex flex-row justify-between align-items-center">
+          <span className="font-bold text-2xl">Daftar Soal Ujian</span>
+          <Button onClick={onCreateNewQuestion}>Tambah Soal</Button>
+        </div>
         <table className="table table-hover mt-5">
           <thead>
             <tr>

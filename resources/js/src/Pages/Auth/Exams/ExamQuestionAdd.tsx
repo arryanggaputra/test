@@ -1,14 +1,16 @@
 import Layout from 'components/Layout'
 import React from 'react'
-import {ExamsEntity} from 'types/type'
+import {ExamsEntity, QuestonsEntity} from 'types/type'
 import QuestionForm from './components/QuestionForm'
 
 interface IExamQuestionAdd {
   exam?: ExamsEntity
+  question?: QuestonsEntity
+  isEdit?: boolean
 }
 
 const ExamQuestionAdd: React.FC<IExamQuestionAdd> = props => {
-  const {exam} = props
+  const {exam, isEdit, question} = props
 
   return (
     <Layout isSinglePage>
@@ -20,7 +22,7 @@ const ExamQuestionAdd: React.FC<IExamQuestionAdd> = props => {
         </span>
       </div>
       <div className="mt-5">
-        <QuestionForm exam={exam} />
+        <QuestionForm isEdit={isEdit} question={question} exam={exam} />
       </div>
     </Layout>
   )

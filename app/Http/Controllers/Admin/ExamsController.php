@@ -84,21 +84,59 @@ class ExamsController extends Controller
         return redirect()->back();
     }
 
-    public function questionsStore($id, Request $request)
+    public function questionsEdit($id, $questionId)
     {
-        $exam = Exam::with('category')->find($id);
+        $exam     = Exam::find($id);
+        $question = Question::with('answer')->find($questionId);
 
+        return Inertia::render('Auth/Exams/ExamQuestionAdd', [
+            'exam'     => $exam,
+            'isEdit'   => true,
+            'question' => $question,
+        ]);
+    }
+
+    public function questionsStore($id)
+    {
+        $exam = Exam::find($id);
+        $this->generateQuestionAndAnswer('CREATE', $exam);
+
+        return redirect()->to('/admin/exams/' . $id . '/questions');
+    }
+
+    public function questionsUpdate($id, $questionId)
+    {
+        $exam     = Exam::find($id);
+        $question = Question::find($questionId);
+        $this->generateQuestionAndAnswer('EDIT', $exam, $question);
+
+        return redirect()->to('/admin/exams/' . $id . '/questions');
+    }
+
+    public function delete($id)
+    {
+        $exam = Exam::find($id);
+        $exam->delete();
+        return redirect()->back();
+    }
+
+    private function generateQuestionAndAnswer(string $method, $exam, $question = null)
+    {
         DB::beginTransaction();
 
-        $_question      = $request->get('question');
-        $_answers       = $request->get('answers');
-        $_correctAnswer = $request->get('selectedAnswer');
+        $_question      = request('question');
+        $_answers       = request('answers');
+        $_correctAnswer = request('selectedAnswer');
 
-        $question              = new Question();
+        $question              = $question === null ? new Question() : Question::find($question->id);
         $question->description = $_question;
         $question->exam_id     = $exam->id;
         $question->category_id = $exam->category_id;
         $question->save();
+
+        if ($method !== 'CREATE') {
+            Answer::where('question_id', $question->id)->delete();
+        }
 
         $listAnswer = array();
 
@@ -111,19 +149,13 @@ class ExamsController extends Controller
             ];
         }
 
+        usort($listAnswer, function ($a, $b) {
+            return strcasecmp($a['value'], $b['value']);
+        });
+
         Answer::insert($listAnswer);
 
         DB::commit();
-
-        return redirect()->to('/admin/exams');
-
-    }
-
-    public function delete($id)
-    {
-        $exam = Exam::find($id);
-        $exam->delete();
-        return redirect()->back();
     }
 
 }

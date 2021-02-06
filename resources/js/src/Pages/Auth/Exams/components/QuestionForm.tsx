@@ -6,16 +6,20 @@ import React, {useCallback, useEffect, useState} from 'react'
 import ReactMarkdown from 'react-markdown'
 import ReactMde from 'react-mde'
 import 'react-mde/lib/styles/css/react-mde-all.css'
-import {ExamsEntity, QuestionChoiceEntity} from 'types/type'
+import {ExamsEntity, QuestionChoiceEntity, QuestonsEntity} from 'types/type'
 import QuestionChoice from './QuestionChoice'
 
 interface IQuestionForm {
   exam?: ExamsEntity
+  question?: QuestonsEntity
+  isEdit?: boolean
 }
 
 const QuestionForm: React.FC<IQuestionForm> = props => {
+  const {exam, isEdit, question} = props
+
   const [descriptionValue, setDescriptionValue] = useState('')
-  const [id, setId] = useState(makeid())
+  const [id] = useState(makeid())
   const [totalAnswer, setTotalAnswer] = useState(3)
   const [selectedTab, setSelectedTab] = useState<'write' | 'preview'>('write')
   const [selectedAnswer, setSelectedAnswer] = useState<string | undefined>(
@@ -24,6 +28,16 @@ const QuestionForm: React.FC<IQuestionForm> = props => {
   const [listAnswers, setListAnswers] = useState(
     new Set<QuestionChoiceEntity>(),
   )
+
+  useEffect(() => {
+    if (!isEdit) return
+
+    setDescriptionValue(question?.description ?? '')
+    setTotalAnswer(question?.answer?.length ? question?.answer?.length - 1 : 3)
+
+    let getCorrectAnswer = question?.answer?.find(item => item.is_correct === 1)
+    setSelectedAnswer(getCorrectAnswer?.value)
+  }, [question, isEdit])
 
   const addAnswer = useCallback(
     (data: QuestionChoiceEntity) => {
@@ -70,10 +84,18 @@ const QuestionForm: React.FC<IQuestionForm> = props => {
       selectedAnswer,
     }
 
-    Inertia.post(`/admin/exams/${props.exam?.id}/questions`, questionToSave)
-  }, [descriptionValue, listAnswers, selectedAnswer])
+    if (!isEdit) {
+      Inertia.post(`/admin/exams/${props.exam?.id}/questions`, questionToSave)
+      return
+    }
+    Inertia.put(
+      `/admin/exams/${props.exam?.id}/questions/${question?.id}`,
+      questionToSave,
+    )
+  }, [descriptionValue, listAnswers, selectedAnswer, isEdit, question])
 
   const renderAnswerField = useCallback(() => {
+    let allAnswers = question?.answer
     let answerField = []
     for (let index = 0; index <= totalAnswer; index++) {
       let keyAnswer = alphabet[index]
@@ -82,6 +104,7 @@ const QuestionForm: React.FC<IQuestionForm> = props => {
           onChange={addAnswer}
           onCorrect={onSelectCorrectAnswer}
           index={index}
+          answer={allAnswers ? allAnswers[index] : undefined}
           id={id}
           keyAnswer={keyAnswer}
           key={keyAnswer}
@@ -89,7 +112,7 @@ const QuestionForm: React.FC<IQuestionForm> = props => {
       )
     }
     return answerField
-  }, [totalAnswer])
+  }, [totalAnswer, question])
 
   const addMoreAnswerField = useCallback(() => {
     setTotalAnswer(totalAnswer + 1)
@@ -107,7 +130,7 @@ const QuestionForm: React.FC<IQuestionForm> = props => {
   }, [totalAnswer, listAnswers])
 
   return (
-    <div className="w-full">
+    <div className="w-full mb-10">
       <h1 className="font-bold text-2xl">Pertanyaan</h1>
       <ReactMde
         value={descriptionValue}

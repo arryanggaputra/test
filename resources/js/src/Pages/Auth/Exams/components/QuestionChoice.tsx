@@ -1,20 +1,21 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react'
-import {QuestionChoiceEntity} from 'types/type'
+import {AnswerEntity, QuestionChoiceEntity} from 'types/type'
 import {DebounceInput} from 'react-debounce-input'
 
 interface IQuestionChoice {
   index: number
   id: string
   keyAnswer: string
+  answer?: AnswerEntity
   onChange: (data: QuestionChoiceEntity) => void
   onCorrect: (key: string) => void
 }
 
 const QuestionChoice: React.FC<IQuestionChoice> = props => {
-  const {id, keyAnswer, index} = props
+  const {id, keyAnswer, index, answer} = props
   const [descriptionValue, setDescriptionValue] = useState('')
 
-  const [answer, setAnswer] = useState<QuestionChoiceEntity>({
+  const [theAnswer, setTheAnswer] = useState<QuestionChoiceEntity>({
     index: index,
     value: keyAnswer,
     description: '',
@@ -23,8 +24,13 @@ const QuestionChoice: React.FC<IQuestionChoice> = props => {
   const firstRun = useRef(true)
 
   useEffect(() => {
-    console.log({answer})
-    props.onChange(answer)
+    props.onChange(theAnswer)
+  }, [theAnswer])
+
+  useEffect(() => {
+    if (!answer) return
+
+    setDescriptionValue(answer.description)
   }, [answer])
 
   useEffect(() => {
@@ -32,9 +38,9 @@ const QuestionChoice: React.FC<IQuestionChoice> = props => {
       firstRun.current = false
       return
     }
-    let _answer = Object.assign({}, answer)
+    let _answer = Object.assign({}, theAnswer)
     _answer.description = descriptionValue
-    setAnswer(_answer)
+    setTheAnswer(_answer)
   }, [descriptionValue])
 
   const onCorrect = useCallback(() => {
@@ -51,11 +57,17 @@ const QuestionChoice: React.FC<IQuestionChoice> = props => {
           value={keyAnswer}
         />
         <span className="uppercase font-bold pl-1">{keyAnswer}.</span>
+        {answer && answer.is_correct === 1 && (
+          <span className="inline-block text-xs bg-green-700 text-white px-3 rounded-sm">
+            Jawaban yang benar
+          </span>
+        )}
       </div>
       <DebounceInput
         minLength={2}
         element="textarea"
         className="w-full"
+        value={descriptionValue}
         debounceTimeout={1000}
         placeholder="Tulis jawaban disini"
         onChange={event => setDescriptionValue(event.target.value)}

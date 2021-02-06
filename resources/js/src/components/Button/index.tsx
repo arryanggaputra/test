@@ -7,10 +7,12 @@ interface IButton {
 const Button: React.FC<React.ButtonHTMLAttributes<
   HTMLButtonElement
 >> = props => {
+  const {className, style, ...rest} = props
   return (
     <button
-      {...props}
-      className="px-5 py-2 bg-green-400 mt-3 text-white"></button>
+      {...rest}
+      className={`px-5 py-2 bg-green-400 mt-3 text-white ${className}`}
+      style={style}></button>
   )
 }
 

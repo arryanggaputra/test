@@ -39,13 +39,19 @@ Route::group(['prefix' => 'admin'], function () {
 
         Route::get('/exams', [ExamsController::class, 'index']);
         Route::get('/exams/{id}', [ExamsController::class, 'edit']);
+        Route::post('/exams', [ExamsController::class, 'store']);
+        Route::delete('/exams/{id}', [ExamsController::class, 'delete']);
+        Route::put('/exams/{id}', [ExamsController::class, 'update']);
+
+        /**
+         * Exam question and answer
+         */
         Route::get('/exams/{id}/questions', [ExamsController::class, 'questions']);
         Route::get('/exams/{id}/questions/add', [ExamsController::class, 'questionsAdd']);
         Route::post('/exams/{id}/questions', [ExamsController::class, 'questionsStore']);
         Route::delete('/exams/{id}/questions/{questionId}', [ExamsController::class, 'questionsDelete']);
-        Route::post('/exams', [ExamsController::class, 'store']);
-        Route::delete('/exams/{id}', [ExamsController::class, 'delete']);
-        Route::put('/exams/{id}', [ExamsController::class, 'update']);
+        Route::get('/exams/{id}/questions/{questionId}/edit', [ExamsController::class, 'questionsEdit']);
+        Route::put('/exams/{id}/questions/{questionId}', [ExamsController::class, 'questionsUpdate']);
 
         Route::get('/logout', [LoginController::class, 'logout']);
     });
