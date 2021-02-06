@@ -40,6 +40,7 @@
         "react-dom": "^16.14.0",
         "react-markdown": "^5.0.3",
         "react-mde": "^11.0.0",
-        "tailwindcss": "npm:@tailwindcss/postcss7-compat"
+        "tailwindcss": "npm:@tailwindcss/postcss7-compat",
+        "tailwindcss-tables": "^0.4.0"
     }
 }

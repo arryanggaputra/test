@@ -60,10 +60,28 @@ class ExamsController extends Controller
 
     public function questions($id)
     {
+        $exam     = Exam::with('category')->find($id);
+        $questons = Question::with('answer')->where('exam_id', $id)->get();
+        return Inertia::render('Auth/Exams/ExamQuestion', [
+            'exam'     => $exam,
+            'questons' => $questons,
+        ]);
+    }
+    public function questionsAdd($id)
+    {
         $exam = Exam::with('category')->find($id);
-        return Inertia::render('Auth/Exams/AddQuestion', [
+        return Inertia::render('Auth/Exams/ExamQuestionAdd', [
             'exam' => $exam,
         ]);
+    }
+
+    public function questionsDelete($id, $questionId)
+    {
+        DB::beginTransaction();
+        Answer::where('question_id', $questionId)->delete();
+        Question::where('id', $questionId)->delete();
+        DB::commit();
+        return redirect()->back();
     }
 
     public function questionsStore($id, Request $request)

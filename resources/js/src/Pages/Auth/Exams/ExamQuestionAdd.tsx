@@ -3,11 +3,11 @@ import React from 'react'
 import {ExamsEntity} from 'types/type'
 import QuestionForm from './components/QuestionForm'
 
-interface IAddQuestion {
+interface IExamQuestionAdd {
   exam?: ExamsEntity
 }
 
-const AddQuestion: React.FC<IAddQuestion> = props => {
+const ExamQuestionAdd: React.FC<IExamQuestionAdd> = props => {
   const {exam} = props
 
   return (
@@ -26,4 +26,4 @@ const AddQuestion: React.FC<IAddQuestion> = props => {
   )
 }
 
-export default AddQuestion
+export default ExamQuestionAdd

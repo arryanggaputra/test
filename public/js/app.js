@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "js/" + ({}[chunkId]||chunkId) + ".js?id=" + {"0":"8f7f44cd856ff55825d0","1":"1c63aa499f4c7d60c67a","2":"51f1244249bb52a50d53","3":"d48402f0603a1e532f51","4":"16f422126e42d2270bdd","6":"d120c55ff419a65f5942","7":"3fbb77567da2e87b0c52","8":"4e7ed35249189fb5b440","9":"2f6ce47acb1138f04f15"}[chunkId] + ""
+/******/ 		return __webpack_require__.p + "js/" + ({}[chunkId]||chunkId) + ".js?id=" + {"0":"21f6322d4aca5a0ccdcd","1":"426ae83637e02c59ae52","2":"d67d2e0bd7972915b0c6","3":"bc54f6c77d688995331b","4":"07e9af0c0095ad2c7f44","5":"01f17b16a2435334ffee","6":"4f2c1380def6e272e7a3","7":"a7f46ed78728e29cf06e","8":"66f01ee14643cf6f5aac"}[chunkId] + ""
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -50829,108 +50829,108 @@ var map = {
 	"./Auth/Categories": [
 		"./resources/js/src/Pages/Auth/Categories/index.tsx",
 		0,
-		2
+		3
 	],
 	"./Auth/Categories/": [
 		"./resources/js/src/Pages/Auth/Categories/index.tsx",
 		0,
-		2
+		3
 	],
 	"./Auth/Categories/index": [
 		"./resources/js/src/Pages/Auth/Categories/index.tsx",
 		0,
-		2
+		3
 	],
 	"./Auth/Categories/index.tsx": [
 		"./resources/js/src/Pages/Auth/Categories/index.tsx",
 		0,
-		2
+		3
 	],
 	"./Auth/Dashboard": [
 		"./resources/js/src/Pages/Auth/Dashboard/index.tsx",
-		4
+		5
 	],
 	"./Auth/Dashboard/": [
 		"./resources/js/src/Pages/Auth/Dashboard/index.tsx",
-		4
+		5
 	],
 	"./Auth/Dashboard/index": [
 		"./resources/js/src/Pages/Auth/Dashboard/index.tsx",
-		4
+		5
 	],
 	"./Auth/Dashboard/index.tsx": [
 		"./resources/js/src/Pages/Auth/Dashboard/index.tsx",
-		4
+		5
 	],
 	"./Auth/Exams": [
 		"./resources/js/src/Pages/Auth/Exams/index.tsx",
 		0,
-		3
+		4
 	],
 	"./Auth/Exams/": [
 		"./resources/js/src/Pages/Auth/Exams/index.tsx",
 		0,
-		3
+		4
 	],
 	"./Auth/Exams/AddQuestion": [
 		"./resources/js/src/Pages/Auth/Exams/AddQuestion.tsx",
 		0,
-		9,
+		1,
 		6
 	],
 	"./Auth/Exams/AddQuestion.tsx": [
 		"./resources/js/src/Pages/Auth/Exams/AddQuestion.tsx",
 		0,
-		9,
+		1,
 		6
 	],
 	"./Auth/Exams/components/QuestionChoice": [
 		"./resources/js/src/Pages/Auth/Exams/components/QuestionChoice.tsx",
-		9,
+		1,
 		8
 	],
 	"./Auth/Exams/components/QuestionChoice.tsx": [
 		"./resources/js/src/Pages/Auth/Exams/components/QuestionChoice.tsx",
-		9,
+		1,
 		8
 	],
 	"./Auth/Exams/components/QuestionForm": [
 		"./resources/js/src/Pages/Auth/Exams/components/QuestionForm.tsx",
 		0,
-		9,
+		1,
 		7
 	],
 	"./Auth/Exams/components/QuestionForm.tsx": [
 		"./resources/js/src/Pages/Auth/Exams/components/QuestionForm.tsx",
 		0,
-		9,
+		1,
 		7
 	],
 	"./Auth/Exams/index": [
 		"./resources/js/src/Pages/Auth/Exams/index.tsx",
 		0,
-		3
+		4
 	],
 	"./Auth/Exams/index.tsx": [
 		"./resources/js/src/Pages/Auth/Exams/index.tsx",
 		0,
-		3
+		4
 	],
 	"./Login": [
 		"./resources/js/src/Pages/Login/index.tsx",
-		1
+		2
 	],
 	"./Login/": [
 		"./resources/js/src/Pages/Login/index.tsx",
-		1
+		2
 	],
 	"./Login/index": [
 		"./resources/js/src/Pages/Login/index.tsx",
-		1
+		2
 	],
 	"./Login/index.tsx": [
 		"./resources/js/src/Pages/Login/index.tsx",
-		1
+		2
 	]
 };
 function webpackAsyncContext(req) {

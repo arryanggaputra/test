@@ -40,7 +40,9 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/exams', [ExamsController::class, 'index']);
         Route::get('/exams/{id}', [ExamsController::class, 'edit']);
         Route::get('/exams/{id}/questions', [ExamsController::class, 'questions']);
+        Route::get('/exams/{id}/questions/add', [ExamsController::class, 'questionsAdd']);
         Route::post('/exams/{id}/questions', [ExamsController::class, 'questionsStore']);
+        Route::delete('/exams/{id}/questions/{questionId}', [ExamsController::class, 'questionsDelete']);
         Route::post('/exams', [ExamsController::class, 'store']);
         Route::delete('/exams/{id}', [ExamsController::class, 'delete']);
         Route::put('/exams/{id}', [ExamsController::class, 'update']);

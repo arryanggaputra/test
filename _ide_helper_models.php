@@ -41,6 +41,31 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\Answer
+ *
+ * @property int $id
+ * @property string $value
+ * @property string $description
+ * @property int $question_id
+ * @property int $is_correct
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Answer newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Answer newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Answer query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Answer whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Answer whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Answer whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Answer whereIsCorrect($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Answer whereQuestionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Answer whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Answer whereValue($value)
+ */
+	class Answer extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Category
  *
  * @property int $id
@@ -82,6 +107,31 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Exam whereUpdatedAt($value)
  */
 	class Exam extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Question
+ *
+ * @property int $id
+ * @property string $description
+ * @property int $category_id
+ * @property int $exam_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Answer[] $answer
+ * @property-read int|null $answer_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Question newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Question newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Question query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Question whereCategoryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Question whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Question whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Question whereExamId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Question whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Question whereUpdatedAt($value)
+ */
+	class Question extends \Eloquent {}
 }
 
 namespace App\Models{

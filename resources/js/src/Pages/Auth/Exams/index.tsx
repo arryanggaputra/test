@@ -56,7 +56,10 @@ const Exams: React.FC<IExam & DefaultProps> = props => {
   }, [title, descriptionValue, selectedCategory, isEdit, exam])
 
   const onDelete = useCallback((id: number) => {
-    Inertia.delete('/admin/exams/' + id)
+    if (confirm('Anda yakin untuk menghapus data ini?')) {
+      Inertia.delete('/admin/exams/' + id)
+      return
+    }
   }, [])
 
   return (

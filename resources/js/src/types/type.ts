@@ -64,3 +64,30 @@ export interface QuestionChoiceEntity {
   value: string
   index: number
 }
+
+export interface QuestonsEntity {
+  id: number
+  description: string
+  category_id: number
+  exam_id: number
+  created_at: string
+  updated_at: string
+  answer?: AnswerEntity[] | null
+  category?: CategoriesEntity | null
+}
+
+export enum IsAnswerCorrect {
+  No = 0,
+  Yes = 1,
+}
+
+export interface AnswerEntity {
+  id: number
+  value: string
+  description: string
+  question_id: number
+  is_correct: IsAnswerCorrect
+  created_at?: null
+  updated_at?: null
+  category?: QuestonsEntity | null
+}
