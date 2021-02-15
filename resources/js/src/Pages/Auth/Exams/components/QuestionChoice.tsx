@@ -47,6 +47,11 @@ const QuestionChoice: React.FC<IQuestionChoice> = props => {
     props.onCorrect(keyAnswer)
   }, [keyAnswer])
 
+  const onDescriptionChange = useCallback((event: any) => {
+    setDescriptionValue(event.target.value)
+  }, [])
+
+
   return (
     <div className="w-full pt-1 pb-1 center items-baseline">
       <div className="flex flex-row items-center">
@@ -70,7 +75,7 @@ const QuestionChoice: React.FC<IQuestionChoice> = props => {
         value={descriptionValue}
         debounceTimeout={1000}
         placeholder="Tulis jawaban disini"
-        onChange={event => setDescriptionValue(event.target.value)}
+        onChange={onDescriptionChange}
       />
     </div>
   )

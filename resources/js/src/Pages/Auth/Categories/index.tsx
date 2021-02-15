@@ -13,7 +13,7 @@ interface ICategories {
   categories?: CategoriesEntity[] | null
 }
 
-const Categories: React.FC<ICategories & DefaultProps> = props => {
+const Categories: React.FC<ICategories & DefaultProps> = (props) => {
   const {isEdit, category, categories} = props
 
   const [descriptionValue, setDescriptionValue] = useState(
@@ -54,7 +54,7 @@ const Categories: React.FC<ICategories & DefaultProps> = props => {
           <input
             type="email"
             value={title}
-            onChange={e => setTitle(e.target.value)}
+            onChange={(e) => setTitle(e.target.value)}
             required
             className="w-full"
             placeholder="Masukan Judul Kategori"
@@ -68,7 +68,7 @@ const Categories: React.FC<ICategories & DefaultProps> = props => {
             onChange={setDescriptionValue}
             selectedTab={selectedTab}
             onTabChange={setSelectedTab}
-            generateMarkdownPreview={markdown =>
+            generateMarkdownPreview={(markdown) =>
               Promise.resolve(<ReactMarkdown source={markdown} />)
             }
             childProps={{
@@ -106,7 +106,7 @@ const Categories: React.FC<ICategories & DefaultProps> = props => {
                       </tr>
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-200">
-                      {categories?.map(item => {
+                      {categories?.map((item) => {
                         return (
                           <tr>
                             <td className="px-6 py-4 whitespace-nowrap">

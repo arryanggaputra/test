@@ -7,7 +7,7 @@ interface IDashboard {
   examTotal: number
 }
 
-const Dashboard: React.FC<IDashboard> = props => {
+const Dashboard: React.FC<IDashboard> = (props) => {
   return (
     <Layout isSinglePage>
       <div className="grid grid-cols-3 gap-5">
