@@ -14,7 +14,7 @@ const path = require('path')
  */
 
 mix
-  .ts('resources/js/app.tsx', 'public/js')
+  .js('resources/js/app.js', 'public/js')
   .react()
   .babelConfig({
     plugins: ['@babel/plugin-syntax-dynamic-import'],
