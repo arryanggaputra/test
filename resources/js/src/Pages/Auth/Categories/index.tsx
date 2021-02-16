@@ -1,5 +1,5 @@
-import Button from 'components/Button'
-import Layout from 'components/Layout'
+import Button from '@components/Button'
+import Layout from '@components/Layout'
 import React, {useCallback, useState} from 'react'
 import ReactMde from 'react-mde'
 import ReactMarkdown from 'react-markdown'

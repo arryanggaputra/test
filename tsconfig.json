@@ -64,10 +64,13 @@
 
     /* Advanced Options */
     "skipLibCheck": true /* Skip type checking of declaration files. */,
-    "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */
-  },
-  "paths": {
-    "components": ["./resources/js/src/components"],
-    "lib": ["./resources/js/src/lib"]
+    "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */,
+
+    "paths": {
+      "@components/*": ["components/*"],
+      "@lib/*": ["lib/*"]
+    },
+    "noImplicitAny": false,
+    "sourceMap": false
   }
 }

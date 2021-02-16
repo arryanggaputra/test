@@ -1,5 +1,6 @@
 const mix = require('laravel-mix')
 require('laravel-mix-tailwind')
+const path = require('path')
 
 /*
  |--------------------------------------------------------------------------
@@ -14,6 +15,10 @@ require('laravel-mix-tailwind')
 
 mix
   .ts('resources/js/app.tsx', 'public/js')
+  .alias({
+    '@components': path.resolve('resources/js/src/components'),
+    '@lib': path.resolve('resources/js/src/lib'),
+  })
   .postCss('resources/css/app.css', 'public/css', [require('tailwindcss')])
   .webpackConfig({
     output: {
@@ -29,10 +34,6 @@ mix
       ],
     },
     resolve: {
-      alias: {
-        components: path.resolve(__dirname, 'resources/js/src/components'),
-        lib: path.resolve(__dirname, 'resources/js/src/lib'),
-      },
       extensions: ['*', '.js', '.jsx', '.vue', '.ts', '.tsx'],
     },
   })

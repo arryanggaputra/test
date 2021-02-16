@@ -1,5 +1,5 @@
-import Button from 'components/Button'
-import Layout from 'components/Layout'
+import Button from '@components/Button'
+import Layout from '@components/Layout'
 import React, {useCallback, useState} from 'react'
 import ReactMde from 'react-mde'
 import ReactMarkdown from 'react-markdown'
@@ -15,7 +15,7 @@ interface IExam {
   categories?: CategoriesEntity[] | null
 }
 
-const Exams: React.FC<IExam & DefaultProps> = props => {
+const Exams: React.FC<IExam & DefaultProps> = (props) => {
   const {isEdit, exam, exams, categories} = props
 
   const [descriptionValue, setDescriptionValue] = useState(
@@ -69,7 +69,7 @@ const Exams: React.FC<IExam & DefaultProps> = props => {
           <input
             type="email"
             value={title}
-            onChange={e => setTitle(e.target.value)}
+            onChange={(e) => setTitle(e.target.value)}
             required
             className="w-full"
             placeholder="Masukan Judul Ujian"
@@ -79,11 +79,11 @@ const Exams: React.FC<IExam & DefaultProps> = props => {
           <span className="text-gray-700 font-bold block">Kategori Ujian</span>
 
           <select
-            onChange={event =>
+            onChange={(event) =>
               setSelectedCategory(parseInt(event.target.value))
             }>
             <option value="">Pilih Kategori</option>
-            {categories?.map(cat => (
+            {categories?.map((cat) => (
               <option
                 selected={selectedCategory === cat.id}
                 key={cat.id}
@@ -101,7 +101,7 @@ const Exams: React.FC<IExam & DefaultProps> = props => {
             onChange={setDescriptionValue}
             selectedTab={selectedTab}
             onTabChange={setSelectedTab}
-            generateMarkdownPreview={markdown =>
+            generateMarkdownPreview={(markdown) =>
               Promise.resolve(<ReactMarkdown source={markdown} />)
             }
             childProps={{
@@ -144,7 +144,7 @@ const Exams: React.FC<IExam & DefaultProps> = props => {
                       </tr>
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-200">
-                      {exams?.map(item => {
+                      {exams?.map((item) => {
                         return (
                           <tr>
                             <td className="px-6 py-4 whitespace-nowrap">

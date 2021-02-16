@@ -1,4 +1,4 @@
-import Layout from 'components/Layout'
+import Layout from '@components/Layout'
 import React from 'react'
 import {ExamsEntity, QuestonsEntity} from 'types/type'
 import QuestionForm from './components/QuestionForm'
@@ -9,7 +9,7 @@ interface IExamQuestionAdd {
   isEdit?: boolean
 }
 
-const ExamQuestionAdd: React.FC<IExamQuestionAdd> = props => {
+const ExamQuestionAdd: React.FC<IExamQuestionAdd> = (props) => {
   const {exam, isEdit, question} = props
 
   return (

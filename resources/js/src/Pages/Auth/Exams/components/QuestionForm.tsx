@@ -1,7 +1,7 @@
 import {Inertia} from '@inertiajs/inertia'
-import Button from 'components/Button'
-import alphabet from 'lib/alphabet'
-import makeid from 'lib/makeId'
+import Button from '@components/Button'
+import alphabet from '@lib/alphabet'
+import makeid from '@lib/makeId'
 import React, {useCallback, useEffect, useState} from 'react'
 import ReactMarkdown from 'react-markdown'
 import ReactMde from 'react-mde'
@@ -15,7 +15,7 @@ interface IQuestionForm {
   isEdit?: boolean
 }
 
-const QuestionForm: React.FC<IQuestionForm> = props => {
+const QuestionForm: React.FC<IQuestionForm> = (props) => {
   const {exam, isEdit, question} = props
 
   const [descriptionValue, setDescriptionValue] = useState('')
@@ -37,13 +37,15 @@ const QuestionForm: React.FC<IQuestionForm> = props => {
     setDiscussValue(question?.discussion ?? '')
     setTotalAnswer(question?.answer?.length ? question?.answer?.length - 1 : 3)
 
-    let getCorrectAnswer = question?.answer?.find(item => item.is_correct === 1)
+    let getCorrectAnswer = question?.answer?.find(
+      (item) => item.is_correct === 1,
+    )
     setSelectedAnswer(getCorrectAnswer?.value)
   }, [question, isEdit])
 
   const addAnswer = useCallback(
     (data: QuestionChoiceEntity) => {
-      listAnswers.forEach(item => {
+      listAnswers.forEach((item) => {
         if (item.value === data.value) {
           listAnswers.delete(item)
         }
@@ -66,7 +68,7 @@ const QuestionForm: React.FC<IQuestionForm> = props => {
       return
     }
 
-    let answerNotValid = Array.from(listAnswers.values()).find(item => {
+    let answerNotValid = Array.from(listAnswers.values()).find((item) => {
       if (!item.description) {
         return item
       }
@@ -130,7 +132,7 @@ const QuestionForm: React.FC<IQuestionForm> = props => {
 
   const reduceAnswerField = useCallback(() => {
     setTotalAnswer(totalAnswer > 0 ? totalAnswer - 1 : 0)
-    listAnswers.forEach(item => {
+    listAnswers.forEach((item) => {
       if (item.index === totalAnswer) {
         listAnswers.delete(item)
       }
@@ -147,7 +149,7 @@ const QuestionForm: React.FC<IQuestionForm> = props => {
         onChange={setDescriptionValue}
         selectedTab={selectedTab}
         onTabChange={setSelectedTab}
-        generateMarkdownPreview={markdown =>
+        generateMarkdownPreview={(markdown) =>
           Promise.resolve(<ReactMarkdown source={markdown} />)
         }
         childProps={{
@@ -181,7 +183,7 @@ const QuestionForm: React.FC<IQuestionForm> = props => {
             onChange={setDiscussValue}
             selectedTab={selectedTab}
             onTabChange={setSelectedTab}
-            generateMarkdownPreview={markdown =>
+            generateMarkdownPreview={(markdown) =>
               Promise.resolve(<ReactMarkdown source={markdown} />)
             }
             childProps={{

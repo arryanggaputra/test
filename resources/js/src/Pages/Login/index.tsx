@@ -1,7 +1,7 @@
 import {Inertia} from '@inertiajs/inertia'
-import AlertMessage from 'components/AlertMessage'
-import Button from 'components/Button'
-import Layout from 'components/Layout'
+import AlertMessage from '@components/AlertMessage'
+import Button from '@components/Button'
+import Layout from '@components/Layout'
 import React, {useCallback, useState} from 'react'
 
 function Login() {
@@ -33,7 +33,7 @@ function Login() {
             <span className="text-gray-700">Email</span>
             <input
               type="email"
-              onChange={e => setEmailAddress(e.target.value)}
+              onChange={(e) => setEmailAddress(e.target.value)}
               required
               className="mt-1 block w-full"
               placeholder="Masukan Alamat E-mail"
@@ -44,7 +44,7 @@ function Login() {
             <input
               type="password"
               required
-              onChange={e => setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
               className="mt-1 block w-full"
               placeholder="Masukan password"
             />

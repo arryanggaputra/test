@@ -1,8 +1,8 @@
 import {Inertia} from '@inertiajs/inertia'
 import {InertiaLink} from '@inertiajs/inertia-react'
-import AlertMessage from 'components/AlertMessage'
-import Button from 'components/Button'
-import Layout from 'components/Layout'
+import AlertMessage from '@components/AlertMessage'
+import Button from '@components/Button'
+import Layout from '@components/Layout'
 import React, {useCallback} from 'react'
 import {ExamsEntity, QuestonsEntity} from 'types/type'
 
@@ -11,7 +11,7 @@ interface IExamQuestion {
   questons?: Array<QuestonsEntity>
 }
 
-const ExamQuestion: React.FC<IExamQuestion> = props => {
+const ExamQuestion: React.FC<IExamQuestion> = (props) => {
   const {exam, questons} = props
 
   const onDelete = useCallback((id: number) => {
@@ -65,7 +65,7 @@ const ExamQuestion: React.FC<IExamQuestion> = props => {
                       {question.description}
                     </h1>
                     <div className="bg-gray-100 p-3 rounded-md">
-                      {question.answer?.map(ans => {
+                      {question.answer?.map((ans) => {
                         return (
                           <div
                             className={`flex flex-row p-2 ${
