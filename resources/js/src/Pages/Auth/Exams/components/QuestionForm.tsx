@@ -108,7 +108,7 @@ const QuestionForm: React.FC<IQuestionForm> = (props) => {
 
   const renderAnswerField = useCallback(() => {
     let allAnswers = question?.answer
-    let answerField = []
+    let answerField: any = []
     for (let index = 0; index <= totalAnswer; index++) {
       let keyAnswer = alphabet[index]
       answerField.push(

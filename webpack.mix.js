@@ -15,6 +15,10 @@ const path = require('path')
 
 mix
   .ts('resources/js/app.tsx', 'public/js')
+  .react()
+  .babelConfig({
+    plugins: ['@babel/plugin-syntax-dynamic-import'],
+  })
   .alias({
     '@components': path.resolve('resources/js/src/components'),
     '@lib': path.resolve('resources/js/src/lib'),
@@ -22,7 +26,7 @@ mix
   .postCss('resources/css/app.css', 'public/css', [require('tailwindcss')])
   .webpackConfig({
     output: {
-      chunkFilename: 'js/[name].js?id=[chunkhash]',
+      chunkFilename: 'js/[name].js',
     },
     module: {
       rules: [
@@ -37,3 +41,5 @@ mix
       extensions: ['*', '.js', '.jsx', '.vue', '.ts', '.tsx'],
     },
   })
+  .version()
+  .sourceMaps()
