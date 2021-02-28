@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Exam;
+use App\Models\Question;
+use DB;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -50,8 +53,14 @@ class CategoriesController extends Controller
 
     public function delete($id)
     {
+        DB::beginTransaction();
         $category = Category::find($id);
         $category->delete();
+
+        Exam::where('category_id', $id)->delete();
+        Question::where('category_id', $id)->delete();
+
+        DB::commit();
         return redirect()->back();
     }
 

@@ -1,9 +1,5 @@
 <?php
 
-use App\Http\Controllers\Admin\CategoriesController;
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\ExamsController;
-use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,42 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-// Route::middleware('admin', function () {
+// Route::get('/', function () {
+//     return view('welcome');
 // });
 
-// Route::get('/exams', [ExamController::class, 'index']);
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
-Route::group(['prefix' => 'admin'], function () {
-    Route::group(['middleware' => ['guest:admin']], function () {
-        Route::get('/login', [LoginController::class, 'index']);
-        Route::post('/login', [LoginController::class, 'adminLogin']);
-    });
-
-    Route::group(['middleware' => ['admin']], function () {
-        Route::get('/', [DashboardController::class, 'index']);
-
-        Route::get('/categories', [CategoriesController::class, 'index']);
-        Route::get('/categories/{id}', [CategoriesController::class, 'edit']);
-        Route::post('/categories', [CategoriesController::class, 'store']);
-        Route::delete('/categories/{id}', [CategoriesController::class, 'delete']);
-        Route::put('/categories/{id}', [CategoriesController::class, 'update']);
-
-        Route::get('/exams', [ExamsController::class, 'index']);
-        Route::get('/exams/{id}', [ExamsController::class, 'edit']);
-        Route::post('/exams', [ExamsController::class, 'store']);
-        Route::delete('/exams/{id}', [ExamsController::class, 'delete']);
-        Route::put('/exams/{id}', [ExamsController::class, 'update']);
-
-        /**
-         * Exam question and answer
-         */
-        Route::get('/exams/{id}/questions', [ExamsController::class, 'questions']);
-        Route::get('/exams/{id}/questions/add', [ExamsController::class, 'questionsAdd']);
-        Route::post('/exams/{id}/questions', [ExamsController::class, 'questionsStore']);
-        Route::delete('/exams/{id}/questions/{questionId}', [ExamsController::class, 'questionsDelete']);
-        Route::get('/exams/{id}/questions/{questionId}/edit', [ExamsController::class, 'questionsEdit']);
-        Route::put('/exams/{id}/questions/{questionId}', [ExamsController::class, 'questionsUpdate']);
-
-        Route::get('/logout', [LoginController::class, 'logout']);
-    });
-});
+require __DIR__ . '/auth.php';
+require __DIR__ . '/admin.php';
+require __DIR__ . '/user.php';

@@ -60,11 +60,12 @@ class ExamsController extends Controller
 
     public function questions($id)
     {
-        $exam     = Exam::with('category')->find($id);
-        $questons = Question::with('answer')->where('exam_id', $id)->get();
+        $exam = Exam::with(['category', 'questions' => function ($table) {
+            $table->with('answer');
+        }])->find($id)->toArray();
         return Inertia::render('Auth/Exams/ExamQuestion', [
             'exam'     => $exam,
-            'questons' => $questons,
+            'questons' => $exam['questions'],
         ]);
     }
     public function questionsAdd($id)
@@ -78,8 +79,12 @@ class ExamsController extends Controller
     public function questionsDelete($id, $questionId)
     {
         DB::beginTransaction();
-        Answer::where('question_id', $questionId)->delete();
+
         Question::where('id', $questionId)->delete();
+        Answer::where('question_id', $questionId)->delete();
+
+        // ExamQuestion::where('exam_id', $id)->where('question_id', $questionId)->delete();
+
         DB::commit();
         return redirect()->back();
     }
@@ -132,12 +137,20 @@ class ExamsController extends Controller
         $question              = $question === null ? new Question() : Question::find($question->id);
         $question->description = $_question;
         $question->discussion  = $_questionDiscussion;
-        $question->exam_id     = $exam->id;
         $question->category_id = $exam->category_id;
-        $question->save();
 
         if ($method !== 'CREATE') {
+            /**
+             * Save question to db related to exam
+             */
+            $exam->questions()->save($question);
+
+            /**
+             * Remove previous answer of a question
+             */
             Answer::where('question_id', $question->id)->delete();
+        } else {
+            $question->save();
         }
 
         $listAnswer = array();

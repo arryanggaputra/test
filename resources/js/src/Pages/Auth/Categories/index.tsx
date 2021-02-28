@@ -44,7 +44,10 @@ const Categories: React.FC<ICategories & DefaultProps> = (props) => {
   }, [title, descriptionValue, isEdit, category])
 
   const onDelete = useCallback((id: number) => {
-    Inertia.delete('/admin/categories/' + id)
+    if (confirm('Seluruh data ujian, soal ujian akan terhapus, anda yakin?')) {
+      Inertia.delete('/admin/categories/' + id)
+      return
+    }
   }, [])
 
   return (
