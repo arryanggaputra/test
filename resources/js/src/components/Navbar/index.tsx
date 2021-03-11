@@ -18,16 +18,20 @@ const Navbar = () => {
           <h1 className="text-xl font-bold text-white">
             <InertiaLink href="/admin">Admin Ujian</InertiaLink>
           </h1>
-          <InertiaLink
-            href="/admin/categories"
-            className="px-2 inline-block ml-2 rounded-sm bg-green-800 text-white hover:text-yellow-300">
-            Category
-          </InertiaLink>
-          <InertiaLink
-            href="/admin/exams"
-            className="px-2 inline-block ml-2 rounded-sm bg-green-800 text-white hover:text-yellow-300">
-            Ujian
-          </InertiaLink>
+          {admin && (
+            <>
+              <InertiaLink
+                href="/admin/categories"
+                className="px-2 inline-block ml-2 rounded-sm bg-green-800 text-white hover:text-yellow-300">
+                Category
+              </InertiaLink>
+              <InertiaLink
+                href="/admin/exams"
+                className="px-2 inline-block ml-2 rounded-sm bg-green-800 text-white hover:text-yellow-300">
+                Ujian
+              </InertiaLink>
+            </>
+          )}
         </div>
         {admin && (
           <div className="flex flex-row">

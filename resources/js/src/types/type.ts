@@ -4,6 +4,11 @@ export interface DefaultProps {
   flash: FlashMessage
 }
 
+export interface Option {
+  value: number
+  label: any
+}
+
 export interface Errors {}
 
 export interface FlashMessage {
@@ -65,7 +70,7 @@ export interface QuestionChoiceEntity {
   index: number
 }
 
-export interface QuestonsEntity {
+export interface QuestionsEntity {
   id: number
   description: string
   discussion?: string
@@ -90,5 +95,5 @@ export interface AnswerEntity {
   is_correct: IsAnswerCorrect
   created_at?: null
   updated_at?: null
-  category?: QuestonsEntity | null
+  category?: QuestionsEntity | null
 }

@@ -1,11 +1,11 @@
 import Layout from '@components/Layout'
 import React from 'react'
-import {ExamsEntity, QuestonsEntity} from 'types/type'
+import {ExamsEntity, QuestionsEntity} from 'types/type'
 import QuestionForm from './components/QuestionForm'
 
 interface IExamQuestionAdd {
   exam?: ExamsEntity
-  question?: QuestonsEntity
+  question?: QuestionsEntity
   isEdit?: boolean
 }
 

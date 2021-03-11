@@ -11,7 +11,7 @@ interface IQuestionChoice {
   onCorrect: (key: string) => void
 }
 
-const QuestionChoice: React.FC<IQuestionChoice> = props => {
+const QuestionChoice: React.FC<IQuestionChoice> = (props) => {
   const {id, keyAnswer, index, answer} = props
   const [descriptionValue, setDescriptionValue] = useState('')
 
@@ -51,7 +51,6 @@ const QuestionChoice: React.FC<IQuestionChoice> = props => {
     setDescriptionValue(event.target.value)
   }, [])
 
-
   return (
     <div className="w-full pt-1 pb-1 center items-baseline">
       <div className="flex flex-row items-center">
@@ -69,7 +68,7 @@ const QuestionChoice: React.FC<IQuestionChoice> = props => {
         )}
       </div>
       <DebounceInput
-        minLength={2}
+        minLength={1}
         element="textarea"
         className="w-full"
         value={descriptionValue}

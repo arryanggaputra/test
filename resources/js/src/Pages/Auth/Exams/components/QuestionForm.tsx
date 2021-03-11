@@ -6,12 +6,12 @@ import React, {useCallback, useEffect, useState} from 'react'
 import ReactMarkdown from 'react-markdown'
 import ReactMde from 'react-mde'
 import 'react-mde/lib/styles/css/react-mde-all.css'
-import {ExamsEntity, QuestionChoiceEntity, QuestonsEntity} from 'types/type'
+import {ExamsEntity, QuestionChoiceEntity, QuestionsEntity} from 'types/type'
 import QuestionChoice from './QuestionChoice'
 
 interface IQuestionForm {
   exam?: ExamsEntity
-  question?: QuestonsEntity
+  question?: QuestionsEntity
   isEdit?: boolean
 }
 
@@ -21,7 +21,7 @@ const QuestionForm: React.FC<IQuestionForm> = (props) => {
   const [descriptionValue, setDescriptionValue] = useState('')
   const [discussValue, setDiscussValue] = useState('')
   const [id] = useState(makeid())
-  const [totalAnswer, setTotalAnswer] = useState(3)
+  const [totalAnswer, setTotalAnswer] = useState(4)
   const [selectedTab, setSelectedTab] = useState<'write' | 'preview'>('write')
   const [selectedAnswer, setSelectedAnswer] = useState<string | undefined>(
     undefined,
@@ -35,7 +35,7 @@ const QuestionForm: React.FC<IQuestionForm> = (props) => {
 
     setDescriptionValue(question?.description ?? '')
     setDiscussValue(question?.discussion ?? '')
-    setTotalAnswer(question?.answer?.length ? question?.answer?.length - 1 : 3)
+    setTotalAnswer(question?.answer?.length ? question?.answer?.length - 1 : 4)
 
     let getCorrectAnswer = question?.answer?.find(
       (item) => item.is_correct === 1,

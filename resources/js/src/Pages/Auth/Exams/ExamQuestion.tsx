@@ -4,15 +4,15 @@ import AlertMessage from '@components/AlertMessage'
 import Button from '@components/Button'
 import Layout from '@components/Layout'
 import React, {useCallback} from 'react'
-import {ExamsEntity, QuestonsEntity} from 'types/type'
+import {ExamsEntity, QuestionsEntity} from 'types/type'
 
 interface IExamQuestion {
   exam?: ExamsEntity
-  questons?: Array<QuestonsEntity>
+  questions?: Array<QuestionsEntity>
 }
 
 const ExamQuestion: React.FC<IExamQuestion> = (props) => {
-  const {exam, questons} = props
+  const {exam, questions} = props
 
   const onDelete = useCallback((id: number) => {
     if (confirm('Anda yakin untuk menghapus data ini?')) {
@@ -23,7 +23,11 @@ const ExamQuestion: React.FC<IExamQuestion> = (props) => {
 
   const onCreateNewQuestion = useCallback(() => {
     Inertia.visit(`/admin/exams/${exam?.id}/questions/add`)
-  }, [])
+  }, [exam])
+
+  const onImportQuestion = useCallback(() => {
+    Inertia.visit(`/admin/exams/${exam?.id}/questions/import`)
+  }, [exam])
 
   return (
     <Layout isSinglePage>
@@ -37,16 +41,24 @@ const ExamQuestion: React.FC<IExamQuestion> = (props) => {
       <div className="mt-5 mb-10">
         <div className="flex flex-row justify-between align-items-center">
           <span className="font-bold text-2xl">Daftar Soal Ujian</span>
-          <Button onClick={onCreateNewQuestion}>Tambah Soal</Button>
+          <div>
+            <Button
+              className=" bg-blue-400 text-black mr-3"
+              onClick={onImportQuestion}>
+              Import
+            </Button>
+            <Button onClick={onCreateNewQuestion}>Tambah Soal</Button>
+          </div>
         </div>
-        {questons && questons.length < 1 && (
+        {questions && questions.length < 1 && (
           <div className="my-10">
             <AlertMessage message={'Tidak ada soal ujian'}></AlertMessage>
           </div>
         )}
+
         <table
           className={`table table-hover mt-5 ${
-            questons && questons.length < 1 ? ' hidden ' : ''
+            questions && questions.length < 1 ? ' hidden ' : ''
           }`}>
           <thead>
             <tr>
@@ -56,7 +68,7 @@ const ExamQuestion: React.FC<IExamQuestion> = (props) => {
             </tr>
           </thead>
           <tbody>
-            {questons?.map((question, index) => {
+            {questions?.map((question, index) => {
               return (
                 <tr>
                   <th>{index + 1}</th>

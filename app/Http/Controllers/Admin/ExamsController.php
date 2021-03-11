@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Answer;
 use App\Models\Category;
 use App\Models\Exam;
+use App\Models\ExamQuestion;
 use App\Models\Question;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
@@ -51,6 +53,7 @@ class ExamsController extends Controller
     {
         $exam       = Exam::find($id);
         $categories = Category::orderBy('created_at', 'DESC')->get();
+
         return Inertia::render('Auth/Exams/index', [
             'isEdit'     => true,
             'exam'       => $exam,
@@ -63,11 +66,13 @@ class ExamsController extends Controller
         $exam = Exam::with(['category', 'questions' => function ($table) {
             $table->with('answer');
         }])->find($id)->toArray();
+
         return Inertia::render('Auth/Exams/ExamQuestion', [
-            'exam'     => $exam,
-            'questons' => $exam['questions'],
+            'exam'      => $exam,
+            'questions' => $exam['questions'],
         ]);
     }
+
     public function questionsAdd($id)
     {
         $exam = Exam::with('category')->find($id);
@@ -76,14 +81,70 @@ class ExamsController extends Controller
         ]);
     }
 
+    public function questionsImport($id, Request $request)
+    {
+
+        $exam       = Exam::with('category')->find($id);
+        $categories = Category::orderBy('created_at', 'DESC')->get();
+
+        $questions = Question::select(['id', 'description']);
+
+        /**
+         * if has category id
+         */
+        if ($request->has('categoryId')) {
+            $questions->where('category_id', $request->get('categoryId'));
+        }
+
+        /**
+         * if has category id
+         */
+        if ($request->has('query')) {
+            $questions->where('description', 'like', '%' . $request->get('query') . '%');
+        }
+
+        if ($request->has('categoryId') || $request->has('query')) {
+            return $questions->take(12)->get()->toJson();
+        }
+
+        return Inertia::render('Auth/Exams/ExamQuestionImport', [
+            'exam'       => $exam,
+            'categories' => $categories,
+            'questions'  => $questions->take(12)->get(),
+        ]);
+    }
+
+    public function questionsImportStore($id, Request $request)
+    {
+        $bulkQuestion = $request->get('selectedQuestions');
+
+        DB::beginTransaction();
+
+        $lists = [];
+        foreach ($bulkQuestion as $questionId) {
+            $lists[] = [
+                'exam_id'     => $id,
+                'question_id' => $questionId,
+                'created_at'  => date('Y-m-d H:i:s'),
+                'updated_at'  => date('Y-m-d H:i:s'),
+            ];
+        }
+
+        ExamQuestion::insert($lists);
+
+        DB::commit();
+
+        return redirect()->to('/admin/exams/' . $id . '/questions');
+
+    }
+
     public function questionsDelete($id, $questionId)
     {
         DB::beginTransaction();
 
         Question::where('id', $questionId)->delete();
         Answer::where('question_id', $questionId)->delete();
-
-        // ExamQuestion::where('exam_id', $id)->where('question_id', $questionId)->delete();
+        ExamQuestion::where('exam_id', $id)->where('question_id', $questionId)->delete();
 
         DB::commit();
         return redirect()->back();
@@ -125,7 +186,7 @@ class ExamsController extends Controller
         return redirect()->back();
     }
 
-    private function generateQuestionAndAnswer(string $method, $exam, $question = null)
+    private function generateQuestionAndAnswer(string $method, Model $exam, $question = null)
     {
         DB::beginTransaction();
 
@@ -139,19 +200,7 @@ class ExamsController extends Controller
         $question->discussion  = $_questionDiscussion;
         $question->category_id = $exam->category_id;
 
-        if ($method !== 'CREATE') {
-            /**
-             * Save question to db related to exam
-             */
-            $exam->questions()->save($question);
-
-            /**
-             * Remove previous answer of a question
-             */
-            Answer::where('question_id', $question->id)->delete();
-        } else {
-            $question->save();
-        }
+        $question->save();
 
         $listAnswer = array();
 
@@ -167,6 +216,22 @@ class ExamsController extends Controller
         usort($listAnswer, function ($a, $b) {
             return strcasecmp($a['value'], $b['value']);
         });
+
+        if ($method === 'EDIT') {
+
+            /**
+             * Remove previous answer of a question
+             */
+            Answer::where('question_id', $question->id)->delete();
+        } else {
+            /**
+             * create relationship
+             */
+            $examQuestionRelation              = new ExamQuestion();
+            $examQuestionRelation->exam_id     = $exam->id;
+            $examQuestionRelation->question_id = $question->id;
+            $examQuestionRelation->save();
+        }
 
         Answer::insert($listAnswer);
 

@@ -48,6 +48,8 @@ Route::group(['prefix' => 'admin'], function () {
          */
         Route::get('/exams/{id}/questions', [ExamsController::class, 'questions']);
         Route::get('/exams/{id}/questions/add', [ExamsController::class, 'questionsAdd']);
+        Route::get('/exams/{id}/questions/import', [ExamsController::class, 'questionsImport']);
+        Route::post('/exams/{id}/questions/import', [ExamsController::class, 'questionsImportStore']);
         Route::post('/exams/{id}/questions', [ExamsController::class, 'questionsStore']);
         Route::delete('/exams/{id}/questions/{questionId}', [ExamsController::class, 'questionsDelete']);
         Route::get('/exams/{id}/questions/{questionId}/edit', [ExamsController::class, 'questionsEdit']);
