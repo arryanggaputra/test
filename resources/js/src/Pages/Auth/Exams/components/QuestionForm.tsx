@@ -6,7 +6,7 @@ import React, {useCallback, useEffect, useState} from 'react'
 import ReactMarkdown from 'react-markdown'
 import ReactMde from 'react-mde'
 import 'react-mde/lib/styles/css/react-mde-all.css'
-import {ExamsEntity, QuestionChoiceEntity, QuestionsEntity} from 'types/type'
+import {ExamsEntity, AnswerOptionEntity, QuestionsEntity} from 'types/type'
 import QuestionChoice from './QuestionChoice'
 
 interface IQuestionForm {
@@ -26,9 +26,7 @@ const QuestionForm: React.FC<IQuestionForm> = (props) => {
   const [selectedAnswer, setSelectedAnswer] = useState<string | undefined>(
     undefined,
   )
-  const [listAnswers, setListAnswers] = useState(
-    new Set<QuestionChoiceEntity>(),
-  )
+  const [listAnswers, setListAnswers] = useState(new Set<AnswerOptionEntity>())
 
   useEffect(() => {
     if (!isEdit) return
@@ -44,7 +42,7 @@ const QuestionForm: React.FC<IQuestionForm> = (props) => {
   }, [question, isEdit])
 
   const addAnswer = useCallback(
-    (data: QuestionChoiceEntity) => {
+    (data: AnswerOptionEntity) => {
       listAnswers.forEach((item) => {
         if (item.value === data.value) {
           listAnswers.delete(item)
@@ -158,8 +156,8 @@ const QuestionForm: React.FC<IQuestionForm> = (props) => {
           },
         }}
       />
-      <div className="flex flex-row">
-        <div className=" flex-1 pr-3">
+      <div className="flex flex-col">
+        <div>
           <div className="rounded-md p-5 w-full mt-2 bg-gray-100">
             <div className=" flex flex-row justify-end">
               <span
@@ -176,7 +174,7 @@ const QuestionForm: React.FC<IQuestionForm> = (props) => {
             <div className="flex flex-col">{renderAnswerField()}</div>
           </div>
         </div>
-        <div className=" flex-1 pr-3">
+        <div>
           <h1 className="font-bold text-2xl my-3">Pembahasan Soal</h1>
           <ReactMde
             value={discussValue}

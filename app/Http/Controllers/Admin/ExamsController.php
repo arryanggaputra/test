@@ -209,6 +209,7 @@ class ExamsController extends Controller
                 'question_id' => $question->id,
                 'description' => $ans['description'],
                 'value'       => $ans['value'],
+                'score'       => $ans['score'],
                 'is_correct'  => $ans['value'] === $_correctAnswer ? true : false,
             ];
         }

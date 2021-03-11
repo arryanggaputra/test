@@ -64,16 +64,11 @@ export interface LinksEntity {
   active: boolean
 }
 
-export interface QuestionChoiceEntity {
-  description?: string
-  value: string
-  index: number
-}
-
 export interface QuestionsEntity {
   id: number
   description: string
   discussion?: string
+  score: number
   category_id: number
   exam_id: number
   created_at: string
@@ -93,7 +88,15 @@ export interface AnswerEntity {
   description: string
   question_id: number
   is_correct: IsAnswerCorrect
+  score: number
   created_at?: null
   updated_at?: null
   category?: QuestionsEntity | null
+}
+
+export interface AnswerOptionEntity {
+  description?: string
+  value: string
+  index: number
+  score: number
 }

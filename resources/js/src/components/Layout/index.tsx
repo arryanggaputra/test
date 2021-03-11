@@ -9,7 +9,7 @@ function Layout(props: ILayout) {
   return (
     <>
       <Navbar />
-      <div className="container mx-auto max-w-screen-lg pt-5">
+      <div className="container mx-auto max-w-screen-lg pt-5 pb-20">
         <div className="flex flex-row">
           {!props.isSinglePage && <div className="w-3/12"></div>}
 
